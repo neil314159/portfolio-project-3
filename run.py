@@ -63,6 +63,18 @@ def show_dashboard():
     print('\n')
     mainmenu()
 
+def add_new_patient():
+    #response = pyip.inputDate('Enter DOB', formats=('%d/%m/%y'))
+    firstname = pyip.inputStr('Enter First name\n')
+    lastname = pyip.inputStr('Enter last name\n')
+    email = pyip.inputEmail('Enter email address:')
+    day = pyip.inputInt(prompt = "Enter day of birth... ", min = 0, lessThan = 31)
+    month = pyip.inputInt(prompt = "Enter amonth of birth ", min = 0, lessThan = 13)
+    year = pyip.inputInt(prompt = "Enter year of birth ", min = 0, lessThan = 2020)
+    print(firstname, lastname)
+
+    #newpatient = Patient(
+
 def load_patients():
     patient_list = []
     info = SHEET.worksheet('data')
@@ -105,6 +117,8 @@ def mainmenu():
         show_instructions()
     if response == "View Dashboard":
         show_dashboard()
+    if response == "Add New Patient":
+        add_new_patient()
 
 def main():
     patient_list = load_patients()
