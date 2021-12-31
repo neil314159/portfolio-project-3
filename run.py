@@ -34,7 +34,14 @@ class Patient:
         days = newdate[0]
         months = newdate[1]
         years = newdate[2]
-        return date.today()
+        
+
+        datetime_str = '09/19/18'
+
+        datetime_object = datetime.strptime(datetime_str, '%m/%d/%y')
+        return datetime_object
+
+
 
 def main():
     info = SHEET.worksheet('data')
