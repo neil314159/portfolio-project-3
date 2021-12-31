@@ -42,7 +42,7 @@ def show_instructions():
             '\n'
             
     )
-    response = pyip.inputMenu(['View Instructions', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
+    mainmenu()
 
 def return_progress_bar(progress, label):
     return "██████-------------- 40% complete"
@@ -67,9 +67,15 @@ def load_patients():
 
     return patient_list
 
+def mainmenu():
+    response = pyip.inputMenu(['View Instructions', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
+    if response == "View Instructions":
+        show_instructions()
+
 def main():
     patient_list = load_patients()
     pb = return_progress_bar(20, "test")
+    print(pb)
     # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
     #os.system('clear')
     print("""
@@ -84,13 +90,13 @@ def main():
 
                                                             
     """)
-    #for a in patient_list:
-    #    print(a.firstname)
 
-    print(pb)
-    response = pyip.inputMenu(['View Instructions', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
-    if response == "View Instructions":
-        show_instructions()
+    #for a in patient_list:
+    #    print(getattr(a, 'firstname'))
+
+
+    #print(pb)
+    mainmenu()
 
 
 
