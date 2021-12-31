@@ -2,7 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import colorama
 from colorama import Fore, Back, Style
-
+from datetime import date
 import pyinputplus as pyip
 
 colorama.init(autoreset=True)
@@ -24,11 +24,18 @@ def main():
     info = SHEET.worksheet('data')
 
     data = info.get_all_values()        
-
-    response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
+    calculate_ages(data)
+   # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
        
 
+def calculate_ages(data):
    
+    data = info.get_all_values() 
+    newdata = data[-1]
+    print(newdata)
+
+
+
 
 print("Welcome!")
 main()
