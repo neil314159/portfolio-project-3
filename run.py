@@ -39,7 +39,7 @@ class Patient:
         datetime_str = '09/19/18'
 
         datetime_object = datetime.strptime(datetime_str, '%m/%d/%y')
-        return datetime_object
+        return years
 
 
 
