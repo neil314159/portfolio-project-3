@@ -5,4 +5,6 @@ class ProgressBar:
         self.label = label
     
     def progress_bar_string():
-        return "██████--------------"
+        #return "██████--------------"
+        return "test"
+

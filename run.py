@@ -25,17 +25,12 @@ SHEET = GSPREAD_CLIENT.open('cpm_data')
 
 
 
-class ProgressBar:
-    def __init__(self):
-        self.percent_complete = 1
-    
-    def print_progress():
-        #
-        return ""
+def return_progress_bar(progress, label):
+    return "██████-------------- 40% complete"
 
 def main():
     patient_list = load_patients()
-    pb = ProgressBar(20, "test")
+    pb = return_progress_bar(20, "test")
     # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
     #os.system('clear')
     print("""
@@ -52,7 +47,8 @@ def main():
     """)
     for a in patient_list:
         print(a.firstname)
-    print(pb.progress_bar_string)
+
+    print(pb)
     response = pyip.inputMenu(['View Patients', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
     print(response)  
 
