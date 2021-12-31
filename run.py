@@ -24,12 +24,16 @@ class Patient:
     def __init__(self):
         self.firstname = "neil"
         self.lastname = "boland"
-        self.dob = "1000"
+        self.dob = "1/2/1980"
         self.firstdose = "TRUE"
         self.seconddose = "TRUE"
         self.booster = "TRUE"
 
     def age(self):
+        newdate = self.dob.split('/')
+        days = newdate[0]
+        months = newdate[1]
+        years = newdate[2]
         return date.today()
 
 def main():
