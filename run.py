@@ -25,7 +25,7 @@ def main():
 
     data = info.get_all_values()        
 
-    response = pyip.inputEmail()
+    response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
        
 
    
