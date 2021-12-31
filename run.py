@@ -45,20 +45,24 @@ def show_instructions():
     mainmenu()
 
 def return_progress_bar(progress, label):
-    return "██████-------------- 40% complete"
+
+    return "██████-------------- " + label
 
 def show_dashboard():
     os.system('clear')
     print('\n')
     print('\n')
     print('\n')
-    print(return_progress_bar(20, "test"))
+    print(return_progress_bar(20, "90% fully vaccinated"))
     print('\n')
     print('\n')
-    print(return_progress_bar(20, "test"))
+    print(return_progress_bar(20, "80% first dose"))
     print('\n')
     print('\n')
-    print(return_progress_bar(20, "test"))
+    print(return_progress_bar(20, "70% second dose"))
+    print('\n')
+    print('\n')
+    print(return_progress_bar(20, "60% have booster"))
     print('\n')
     print('\n')
     mainmenu()
@@ -73,6 +77,8 @@ def add_new_patient():
     year = pyip.inputInt(prompt = "Enter year of birth ", min = 0, lessThan = 2020)
     print(firstname, lastname)
 
+    os.system('clear')
+    mainmenu()
     #newpatient = Patient(
 
 def load_patients():
@@ -88,12 +94,36 @@ def load_patients():
         patient_list.append(Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6]))
 
     n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
-    #print(n.age())
-
-    #for p in patient_list:
-        #print(p.id)
-
+    
     return patient_list
+
+def calculate_vaxed():
+    patient_list = load_patients()
+    firstdose = 0
+    for a in patient_list:
+        if (getattr(a, 'first_dose')) == "TRUE":
+            firstdose +=1
+
+    totalfirstdose = firstdose/len(patient_list)
+
+    seconddose = 0
+    for a in patient_list:
+        if (getattr(a, 'second_dose')) == "TRUE":
+            seconddose +=1
+
+    totalseconddose = seconddose/len(patient_list)
+
+    booster = 0
+    for a in patient_list:
+        if (getattr(a, 'booster_dose')) == "TRUE":
+            booster +=1
+
+    totalbooster = firstdose/len(patient_list)
+
+    print(totalfirstdose)
+    print(totalseconddose)
+    print(totalbooster)
+
 
 def mainmenu():
     response = pyip.inputMenu(['Home', 'View Patients', 'Add New Patient', 'Update Patient Details', 'View Dashboard', 'View Instructions'], numbered=True)
@@ -111,6 +141,7 @@ def mainmenu():
 
                                                             
         """)
+        calculate_vaxed()
         mainmenu()
     
     if response == "View Instructions":
