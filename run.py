@@ -30,7 +30,7 @@ def main():
 
 def calculate_ages(data):
    
-    data = info.get_all_values() 
+    
     newdata = data[-1]
     print(newdata)
 
