@@ -16,4 +16,5 @@ info = SHEET.worksheet('data')
 
 data = info.get_all_values()
 
+
 print(data)
