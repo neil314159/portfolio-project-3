@@ -36,8 +36,7 @@ def main():
 
        
 
-   print(sales_data)
-
+   
 
 print("Welcome!")
 main()
