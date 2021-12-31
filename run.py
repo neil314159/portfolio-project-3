@@ -8,6 +8,7 @@ import os
 from classes.mixins import ManageDisplay
 
 from classes.patient import Patient
+from classes.progressbar import ProgressBar
 
 colorama.init(autoreset=True)
 
@@ -50,7 +51,7 @@ def main():
                                                             
     """)
     response = pyip.inputMenu(['View Patients', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
-       
+    print(response)  
 
 def load_patients():
     patient_list = []
