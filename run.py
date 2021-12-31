@@ -151,19 +151,19 @@ def mainmenu():
         add_new_patient()
     if response == "View Patients":
         a="""
-        +─────────────+─────────────+────────────────+──────────+───────────+──────────+
-        | First Name  | Last Name   | Date of birth  | 1st Dose | 2nd Dose  | Booster  |
-        +─────────────+─────────────+────────────────+──────────+───────────+──────────+
-        | Lewiss      | Falk           | 27/04/1936  |    ✅    | TRUE    | FALSE    |
-        | Angelia     | Gleader        | 29/06/1945  |    ✅    | TRUE    | TRUE     |
-        | Rudd        | Howorth        | 14/06/1967  |    ✅    | TRUE    | TRUE     |
-        | Maryjane    | Carolan        | 30/12/1989  |    ✅    | TRUE    | TRUE     |
-        | Glenda      | McPhelimey     | 16/03/1993  | TRUE     | TRUE    | TRUE     |
-        | Alexis      | MacMarcuis     | 21/08/1923  | TRUE     | TRUE    | TRUE     |
-        | Griffie     | Pero           | 26/11/1982  | TRUE     | TRUE    | TRUE     |
-        | Moria       | Van der Merwe  | 17/09/1951  | FALSE    | TRUE    | TRUE     |
-        | Lamont      | Crevagh        | 15/03/2000  | TRUE     | FALS    | FALSE    |
-        +─────────────+─────────────+────────────────+──────────+───────────+──────────+
++─────────────+─────────────+────────────────+──────────+───────────+──────────+
+| First Name  | Last Name   | Date of birth  | 1st Dose | 2nd Dose  | Booster  |
++─────────────+─────────────+────────────────+──────────+───────────+──────────+
+| Lewiss      | Falk           | 27/04/1936  |    ✅    | TRUE    | FALSE    |
+| Angelia     | Gleader        | 29/06/1945  |    ✅    | TRUE    | TRUE     |
+| Rudd        | Howorth        | 14/06/1967  |    ✅    | TRUE    | TRUE     |
+| Maryjane    | Carolan        | 30/12/1989  |    ✅    | TRUE    | TRUE     |
+| Glenda      | McPhelimey     | 16/03/1993  | TRUE     | TRUE    | TRUE     |
+| Alexis      | MacMarcuis     | 21/08/1923  | TRUE     | TRUE    | TRUE     |
+| Griffie     | Pero           | 26/11/1982  | TRUE     | TRUE    | TRUE     |
+| Moria       | Van der Merwe  | 17/09/1951  | FALSE    | TRUE    | TRUE     |
+| Lamont      | Crevagh        | 15/03/2000  | TRUE     | FALS    | FALSE    |
++─────────────+─────────────+────────────────+──────────+───────────+──────────+
 """
 
         print(a)
