@@ -28,7 +28,7 @@ SHEET = GSPREAD_CLIENT.open('cpm_data')
 def show_instructions():
     os.system('clear')
     print(
-            'The Covid Vacination Manager wallows you to keep track \n'
+            'The Covid Vacination Manager allows you to keep track \n'
             'of the vaccination status of a list of patients \n'
             '\n'
             'You can view a list of all patients and see at a glance\n'
@@ -90,11 +90,11 @@ def load_patients():
     #calculate_ages(data)
     
     for a in data:
-        new_patient = Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
+        #new_patient = Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
        # print(a[3])
         patient_list.append(Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6]))
 
-    n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
+    #n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
     
     return patient_list
 
@@ -174,7 +174,7 @@ def main():
     pb = return_progress_bar(20, "test")
     #print(pb)
     # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
-    #os.system('clear')
+    os.system('clear')
     print("""
        _____             _      _   _______                 _               
      / ____|            (_)    | | |__   __|               | |              
@@ -183,9 +183,7 @@ def main():
     | |____| (_) |\ V / | || (_| |    | || |  | (_| || (__ |   <|  __/| |   
      \_____|\___/  \_/  |_| \__,_|    |_||_|   \__,_| \___||_|\_\\___||_|   
                                                                             
-                                                                            
-
-                                                            
+                                                                                                                               
     """)
 
     #for a in patient_list:
