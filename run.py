@@ -50,19 +50,21 @@ def return_progress_bar(progress, label):
 
 def show_dashboard():
     os.system('clear')
+    one, two, three = calculate_vaxed()
+    #print(one)
     print('\n')
     print('\n')
     print('\n')
     print(return_progress_bar(20, "90% fully vaccinated"))
     print('\n')
     print('\n')
-    print(return_progress_bar(20, "80% first dose"))
+    print(return_progress_bar(one, "80% first dose"))
     print('\n')
     print('\n')
-    print(return_progress_bar(20, "70% second dose"))
+    print(return_progress_bar(two, "70% second dose"))
     print('\n')
     print('\n')
-    print(return_progress_bar(20, "60% have booster"))
+    print(return_progress_bar(three, "60% have booster"))
     print('\n')
     print('\n')
     mainmenu()
@@ -104,25 +106,23 @@ def calculate_vaxed():
         if (getattr(a, 'first_dose')) == "TRUE":
             firstdose +=1
 
-    totalfirstdose = firstdose/len(patient_list)
+    totalfirstdose = (firstdose/len(patient_list))*100
 
     seconddose = 0
     for a in patient_list:
         if (getattr(a, 'second_dose')) == "TRUE":
             seconddose +=1
 
-    totalseconddose = seconddose/len(patient_list)
+    totalseconddose = (seconddose/len(patient_list))*100
 
     booster = 0
     for a in patient_list:
         if (getattr(a, 'booster_dose')) == "TRUE":
             booster +=1
 
-    totalbooster = firstdose/len(patient_list)
+    totalbooster = (booster/len(patient_list))*100
 
-    print(totalfirstdose)
-    print(totalseconddose)
-    print(totalbooster)
+    return(totalfirstdose, totalseconddose, totalbooster)
 
 
 def mainmenu():
@@ -141,7 +141,7 @@ def mainmenu():
 
                                                             
         """)
-        calculate_vaxed()
+        #calculate_vaxed()
         mainmenu()
     
     if response == "View Instructions":

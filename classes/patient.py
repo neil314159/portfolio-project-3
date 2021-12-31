@@ -12,8 +12,8 @@ class Patient:
         self.lastname = lastname
         self.date_of_birth = date_of_birth
         self.first_dose = first_dose
-        self.seconddose = second_dose
-        self.booster = booster
+        self.second_dose = second_dose
+        self.booster_dose = booster
 
     def age(self):
         newdate = self.date_of_birth.split('/')
