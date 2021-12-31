@@ -47,6 +47,22 @@ def show_instructions():
 def return_progress_bar(progress, label):
     return "██████-------------- 40% complete"
 
+def show_dashboard():
+    os.system('clear')
+    print('\n')
+    print('\n')
+    print('\n')
+    print(return_progress_bar(20, "test"))
+    print('\n')
+    print('\n')
+    print(return_progress_bar(20, "test"))
+    print('\n')
+    print('\n')
+    print(return_progress_bar(20, "test"))
+    print('\n')
+    print('\n')
+    mainmenu()
+
 def load_patients():
     patient_list = []
     info = SHEET.worksheet('data')
@@ -71,6 +87,8 @@ def mainmenu():
     response = pyip.inputMenu(['View Instructions', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
     if response == "View Instructions":
         show_instructions()
+    if response == "View Dashboard":
+        show_dashboard()
 
 def main():
     patient_list = load_patients()
