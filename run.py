@@ -55,7 +55,7 @@ def show_dashboard():
     
     print('\n')
     print(return_progress_bar(20, "90% fully vaccinated"))
-    print('\n')
+   
     print('\n')
     print(return_progress_bar(one, "80% first dose"))
     
