@@ -6,6 +6,8 @@ from datetime import datetime
 import pyinputplus as pyip
 import os
 
+from classes.patient import Patient
+
 colorama.init(autoreset=True)
 
 SCOPE = [
@@ -19,31 +21,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('cpm_data')
 
-class Patient:
 
-
-    def __init__(self):
-        self.firstname = "neil"
-        self.lastname = "boland"
-        self.dob = "1/2/1990"
-        self.firstdose = "TRUE"
-        self.seconddose = "TRUE"
-        self.booster = "TRUE"
-
-    def age(self):
-        newdate = self.dob.split('/')
-        days = int(newdate[0])
-        months = int(newdate[1])
-        years = int(newdate[2])
-        
-        today = datetime.today()
-
-        difference = ((today.month, today.day) < (months, days))
-        
-        bday = today.year - years - int(difference)
-       
-       
-        return bday
 
 class ProgressBar:
     def __init__(self):
@@ -54,12 +32,8 @@ class ProgressBar:
         return ""
 
 def main():
-    info = SHEET.worksheet('data')
-
-    data = info.get_all_values()        
-    #calculate_ages(data)
-    n = Patient()
-    print(n.age())
+    patient_list = load_patients()
+   
     # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
     #os.system('clear')
     print("""
@@ -82,11 +56,16 @@ def main():
     """)
        
 
-def calculate_ages(data):
-   
-    
-    newdata = data[-1]
-    print(newdata)
+def load_patients():
+    patient_list = []
+    info = SHEET.worksheet('data')
+
+    data = info.get_all_values()        
+    #calculate_ages(data)
+    n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
+    print(n.age())
+    return patient_list
+
 
 
 
