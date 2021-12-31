@@ -150,6 +150,25 @@ def mainmenu():
         show_dashboard()
     if response == "Add New Patient":
         add_new_patient()
+    if response == "View Patients":
+        a="""
+        +─────────────+────────────────+────────────────+──────────────+──────────────+──────────+
+        | First Name  | Last Name      | Date of birth  | 1st Vaccine  | 2nd Vaccine  | Booster  |
+        +─────────────+────────────────+────────────────+──────────────+──────────────+──────────+
+        | Lewiss      | Falk           | 27/04/1936     |    ✅        | TRUE         | FALSE    |
+        | Angelia     | Gleader        | 29/06/1945     |    ✅        | TRUE         | TRUE     |
+        | Rudd        | Howorth        | 14/06/1967     |    ✅        | TRUE         | TRUE     |
+        | Maryjane    | Carolan        | 30/12/1989     |    ✅        | TRUE         | TRUE     |
+        | Glenda      | McPhelimey     | 16/03/1993     | TRUE         | TRUE         | TRUE     |
+        | Alexis      | MacMarcuis     | 21/08/1940     | TRUE         | TRUE         | TRUE     |
+        | Griffie     | Pero           | 26/11/1982     | TRUE         | TRUE         | TRUE     |
+        | Moria       | Van der Merwe  | 17/09/1951     | FALSE        | TRUE         | TRUE     |
+        | Lamont      | Crevagh        | 15/03/2000     | TRUE         | FALSE        | FALSE    |
+        +─────────────+────────────────+────────────────+──────────────+──────────────+──────────+
+"""
+
+        print(a)
+        mainmenu()
 
 def main():
     patient_list = load_patients()
