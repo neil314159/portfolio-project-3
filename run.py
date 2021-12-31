@@ -5,6 +5,7 @@ from colorama import Fore, Back, Style
 from datetime import datetime
 import pyinputplus as pyip
 import os
+from classes.mixins import ManageDisplay
 
 from classes.patient import Patient
 
