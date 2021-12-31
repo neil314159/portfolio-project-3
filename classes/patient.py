@@ -26,6 +26,6 @@ class Patient:
         difference = ((today.month, today.day) < (months, days))
             
         bday = today.year - years - int(difference)
-        print(bday)
+        #print(bday)
         
         return bday

@@ -25,8 +25,47 @@ SHEET = GSPREAD_CLIENT.open('cpm_data')
 
 
 
+def show_instructions():
+    os.system('clear')
+    print(
+            'The Covid Vacination Manager wallows you to keep track \n'
+            'of the vaccination status of a list of patients \n'
+            '\n'
+            'You can view a list of all patients and see at a glance\n'
+            'their status.'
+            '\n You can also add new patients or update the status of \n'
+            'current ones \n'
+            'There is a dashboard which provides graphical representation\n'
+            'of the entire patient body and allows you to compile lists'
+            '\n of those most at risk'
+            '\n'
+            '\n'
+            
+    )
+    response = pyip.inputMenu(['View Instructions', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
+
 def return_progress_bar(progress, label):
     return "██████-------------- 40% complete"
+
+def load_patients():
+    patient_list = []
+    info = SHEET.worksheet('data')
+
+    data = info.get_all_values()        
+    #calculate_ages(data)
+    
+    for a in data:
+        new_patient = Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
+       # print(a[3])
+        patient_list.append(Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6]))
+
+    n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
+    #print(n.age())
+
+    #for p in patient_list:
+        #print(p.id)
+
+    return patient_list
 
 def main():
     patient_list = load_patients()
@@ -45,32 +84,15 @@ def main():
 
                                                             
     """)
-    for a in patient_list:
-        print(a.firstname)
+    #for a in patient_list:
+    #    print(a.firstname)
 
     print(pb)
-    response = pyip.inputMenu(['View Patients', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
-    print(response)  
+    response = pyip.inputMenu(['View Instructions', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
+    if response == "View Instructions":
+        show_instructions()
 
-def load_patients():
-    patient_list = []
-    info = SHEET.worksheet('data')
 
-    data = info.get_all_values()        
-    #calculate_ages(data)
-    
-    for a in data:
-        new_patient = Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
-        print(a[3])
-        patient_list.append(Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6]))
-
-    n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
-    print(n.age())
-
-    #for p in patient_list:
-        #print(p.id)
-
-    return patient_list
 
 
 
