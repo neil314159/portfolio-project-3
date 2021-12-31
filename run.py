@@ -46,26 +46,25 @@ def show_instructions():
 
 def return_progress_bar(progress, label):
 
-    return "██████-------------- " + label
+    return "     ██████-------------- " + label
 
 def show_dashboard():
     os.system('clear')
     one, two, three = calculate_vaxed()
     #print(one)
-    print('\n')
-    print('\n')
+    
     print('\n')
     print(return_progress_bar(20, "90% fully vaccinated"))
     print('\n')
     print('\n')
     print(return_progress_bar(one, "80% first dose"))
-    print('\n')
+    
     print('\n')
     print(return_progress_bar(two, "70% second dose"))
-    print('\n')
+   
     print('\n')
     print(return_progress_bar(three, "60% have booster"))
-    print('\n')
+    
     print('\n')
     mainmenu()
 
