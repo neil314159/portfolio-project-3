@@ -64,14 +64,15 @@ def load_patients():
     #calculate_ages(data)
     
     for a in data:
-        new_patient = Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
-        patient_list.append(new_patient)
+        #new_patient = Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
+        patient_list.append(Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6]))
 
-    n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
-    print(n.age())
+    #n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
+    # print(n.age())
 
-    for p in patient_list:
-        print(p.lastname)
+    #for p in patient_list:
+        #print(p.id)
+
     return patient_list
 
 
