@@ -1,0 +1,1 @@
+#class to manage entire app
