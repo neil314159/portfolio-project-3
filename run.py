@@ -150,6 +150,7 @@ def mainmenu():
     if response == "Add New Patient":
         add_new_patient()
     if response == "View Patients":
+        os.system('clear')
         a="""
 +─────────────+─────────────+────────────────+──────────+───────────+──────────+
 | First Name  | Last Name   | Date of birth  | 1st Dose | 2nd Dose  | Booster  |
