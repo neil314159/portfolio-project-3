@@ -76,8 +76,11 @@ def add_new_patient():
     day = pyip.inputInt(prompt = "Enter day of birth... ", min = 0, lessThan = 31)
     month = pyip.inputInt(prompt = "Enter amonth of birth ", min = 0, lessThan = 13)
     year = pyip.inputInt(prompt = "Enter year of birth ", min = 0, lessThan = 2020)
-    print(firstname, lastname)
-
+    date_of_birth = str(day)+"/"+ str(month)+"/"+ str(year)
+    new_patient = Patient(1, firstname, lastname, date_of_birth, True, True, True)  
+    info = SHEET.worksheet('data')
+    newdata = [1, firstname, lastname, date_of_birth, True, True, True]
+    info.append_row(newdata)
     os.system('clear')
     mainmenu()
     #newpatient = Patient(
@@ -155,10 +158,10 @@ def mainmenu():
 +─────────────+─────────────+────────────────+──────────+───────────+──────────+
 | First Name  | Last Name   | Date of birth  | 1st Dose | 2nd Dose  | Booster  |
 +─────────────+─────────────+────────────────+──────────+───────────+──────────+
-| Lewiss      | Falk           | 27/04/1936  |    ✅    | TRUE    | FALSE    |
-| Angelia     | Gleader        | 29/06/1945  |    ✅    | TRUE    | TRUE     |
-| Rudd        | Howorth        | 14/06/1967  |    ✅    | TRUE    | TRUE     |
-| Maryjane    | Carolan        | 30/12/1989  |    ✅    | TRUE    | TRUE     |
+| Lewiss      | Falk           | 27/04/1936  |    ✅     | TRUE    | FALSE    |
+| Angelia     | Gleader        | 29/06/1945  |    ✅     | TRUE    | TRUE     |
+| Rudd        | Howorth        | 14/06/1967  |    ✅     | TRUE    | TRUE     |
+| Maryjane    | Carolan        | 30/12/1989  |    ✅     | TRUE    | TRUE     |
 | Glenda      | McPhelimey     | 16/03/1993  | TRUE     | TRUE    | TRUE     |
 | Alexis      | MacMarcuis     | 21/08/1923  | TRUE     | TRUE    | TRUE     |
 | Griffie     | Pero           | 26/11/1982  | TRUE     | TRUE    | TRUE     |
