@@ -84,7 +84,23 @@ def load_patients():
     return patient_list
 
 def mainmenu():
-    response = pyip.inputMenu(['View Instructions', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
+    response = pyip.inputMenu(['Home', 'View Patients', 'Add New Patient', 'Update Patient Details', 'View Dashboard', 'View Instructions'], numbered=True)
+    if response == "Home":
+        os.system('clear')
+        print("""
+       _____             _      _   _______                 _               
+      / ____|            (_)    | | |__   __|               | |              
+    | |      ___ __   __ _   __| |    | | _ __  __ _   ___ | | __ ___  _ __ 
+    | |     / _ \\ \ / /| | / _` |    | || '__|/ _` | / __|| |/ // _ \| '__|
+    | |____| (_) |\ V / | || (_| |    | || |  | (_| || (__ |   <|  __/| |   
+     \_____|\___/  \_/  |_| \__,_|    |_||_|   \__,_| \___||_|\_\\___||_|   
+                                                                            
+                                                                            
+
+                                                            
+        """)
+        mainmenu()
+    
     if response == "View Instructions":
         show_instructions()
     if response == "View Dashboard":
@@ -93,7 +109,7 @@ def mainmenu():
 def main():
     patient_list = load_patients()
     pb = return_progress_bar(20, "test")
-    print(pb)
+    #print(pb)
     # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
     #os.system('clear')
     print("""
@@ -115,10 +131,6 @@ def main():
 
     #print(pb)
     mainmenu()
-
-
-
-
 
 
 
