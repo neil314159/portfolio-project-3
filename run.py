@@ -35,7 +35,7 @@ class ProgressBar:
 
 def main():
     patient_list = load_patients()
-   
+    pb = ProgressBar(20, "test")
     # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
     #os.system('clear')
     print("""
@@ -50,6 +50,9 @@ def main():
 
                                                             
     """)
+    for a in patient_list:
+        print(a.firstname)
+    print(pb.progress_bar_string)
     response = pyip.inputMenu(['View Patients', 'Add New Patient', 'Update Patient Details', 'View Dashboard'], numbered=True)
     print(response)  
 
@@ -61,11 +64,12 @@ def load_patients():
     #calculate_ages(data)
     
     for a in data:
-        #new_patient = Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
+        new_patient = Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
+        print(a[3])
         patient_list.append(Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6]))
 
-    #n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
-    # print(n.age())
+    n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
+    print(n.age())
 
     #for p in patient_list:
         #print(p.id)
