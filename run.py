@@ -4,6 +4,7 @@ import colorama
 from colorama import Fore, Back, Style
 from datetime import datetime
 import pyinputplus as pyip
+import os
 
 colorama.init(autoreset=True)
 
@@ -59,7 +60,8 @@ def main():
     #calculate_ages(data)
     n = Patient()
     print(n.age())
-   # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
+    # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
+    os.system('clear')
        
 
 def calculate_ages(data):
