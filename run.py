@@ -5,6 +5,7 @@ from google.oauth2.service_account import Credentials
 from datetime import datetime
 import pyinputplus as pyip
 import os
+
 from classes.mixins import ManageDisplay
 from termcolor import colored, cprint
 from prettytable import PrettyTable
@@ -13,7 +14,7 @@ from pyfiglet import Figlet
 from classes.patient import Patient
 from classes.progressbar import ProgressBar
 
-#from classes.clinic import Clinic
+from classes.clinic import Clinic
 
 #colorama.init(autoreset=True)
 
@@ -53,6 +54,7 @@ def show_instructions():
         '\n'
 
     )
+    input("Hot enter key to return")
     mainmenu()
 
 
@@ -82,7 +84,8 @@ def show_dashboard():
 
     print('\n')
     
-    input("Hit enter key to return to main menu")
+    input("\n Hit enter key to return to main menu")
+    #pause("Press any key to return to the main menu")
     mainmenu()
 
 
@@ -181,10 +184,10 @@ def mainmenu():
         mainmenu()
 
 
-def main():
-    patient_list = load_patients()
-    os.system('clear')
-    mainmenu()
+if __name__ == '__main__':
+    # patient_list = load_patients()
+    # os.system('clear')
+    # mainmenu()
+    manager = Clinic()
 
 
-main()
