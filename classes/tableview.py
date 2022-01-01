@@ -14,9 +14,12 @@ class TableView():
             x.add_row([getattr(a, 'firstname'), getattr(a, 'lastname'), a.age(), getattr(a, 'second_dose')])
         
         
+        print("+" + ("-")*8 + "+" + ("-")*20 + "+" + ("-")*20 + "+" + ("-")*8 + "+" + ("-")*6 + "+" + ("-")*6 + "+" + ("-")*6 + "+")
         
         print(x)
         
+
+
     
     def next_page(self):
         page_number +=1
