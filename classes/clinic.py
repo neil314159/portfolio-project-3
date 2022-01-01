@@ -208,7 +208,7 @@ class Clinic:
             if patient_table.page_number < 1:
                 menu = ['Next Page', 'Main Menu']
             else:
-                menu = ['Previous Page', 'Next Page', 'Main Menu']
+                menu = ['Next Page', 'Previous Page', 'Main Menu']
 
             response = pyip.inputMenu(menu, numbered=True)
 

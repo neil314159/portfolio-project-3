@@ -19,10 +19,12 @@ class TableView():
 
     #     for i, elm in enumerate(test_list[7:40], 7):
     # print i, elm stack overflow
-
-        for i, patient in enumerate(self.patient_data[21:31], 21):
+        start_record = (self.page_number)*10
+        end_record = ((self.page_number)*10) + 10
+        
+        for i, patient in enumerate(self.patient_data[start_record:end_record], start_record):
             new_row = []
-            new_row.append(i)
+            new_row.append(i+1)
             new_row.append(getattr(patient, 'firstname'))
             new_row.append(getattr(patient, 'lastname'))
             new_row.append(patient.age())
