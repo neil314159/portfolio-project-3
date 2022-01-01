@@ -23,7 +23,7 @@ class TableView():
     # print i, elm stack overflow
         start_record = (self.page_number)*10
         end_record = ((self.page_number)*10) + 10
-        
+
         for i, patient in enumerate(self.patient_data[start_record:end_record], start_record):
             new_row = []
             new_row.append(i+1)
@@ -33,10 +33,9 @@ class TableView():
 
             new_row.append(green_yes) if((getattr(patient, 'first_dose')) == "TRUE") else new_row.append(red_no)
             new_row.append(green_yes) if((getattr(patient, 'second_dose')) == "TRUE") else new_row.append(red_no)
-            new_row.append(green_yes) if((getattr(patient, 'booster_dose')) == "TRUE") else new_row.append(red_no)
+            new_row.append(green_yes) if((getattr(patient, 'booster_dose')) 
+                                         == "TRUE") else new_row.append(red_no)
 
             patient_view.add_row(new_row)
         print(colored(f'Page number: {self.page_number+1}', 'yellow'))
         print(patient_view)
-
-    

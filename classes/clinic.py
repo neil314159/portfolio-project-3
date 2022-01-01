@@ -55,8 +55,10 @@ class Clinic:
     def main_menu(self):
         self.clear_display()
         print(colored(self.header("Vaccine Clinic Tracker"), 'green'))
-        response = pyip.inputMenu(['Guide', 'View At Risk Patients', 'View All Patients',
-                                   'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
+        response = pyip.inputMenu(['Guide', 'View At Risk Patients',
+                                   'View All Patients',
+                                   'Enroll New Patient',
+                                   'View Progress Dashboard'], numbered=True)
 
         if response == "Guide":
             self.show_guide()
@@ -81,7 +83,6 @@ class Clinic:
         bar_chart = ["Booster", "2nd Dose", "1st Dose"]
         percentages = [booster, second_dose, first_dose]
 
-        # or shorter orientation = 'h'
         plt.bar(bar_chart, percentages, orientation="horizontal")
         plt.xticks([0, 25, 75, 100])
         plt.xlim(0, 100)
@@ -91,7 +92,6 @@ class Clinic:
         plt.show()
 
         input("\n Hit the enter key to return to main menu: ")
-        #pause("Press any key to return to the main menu")
         self.main_menu()
 
     def add_new_patient(self):
@@ -119,12 +119,12 @@ class Clinic:
 
         first_dose = second_dose = booster = False
         first_dose_prompt = pyip.inputYesNo(
-            "Has the patient had their first vaccine dose? Type Yes(Y) or No(N): ")
+            "Has the patient had their first dose? Type Yes(Y) or No(N): ")
 
         if first_dose_prompt == "yes":
             first_dose = True
             second_dose_prompt = pyip.inputYesNo(
-                "Has the patient had their second vaccine dose? Type Yes(Y) or No(N): ")
+                "Has the patient had their second dose? Type Yes(Y) or No(N): ")
             if second_dose_prompt == "yes":
                 second_dose = True
                 booster_prompt = pyip.inputYesNo(
@@ -132,16 +132,11 @@ class Clinic:
                 if booster_prompt == "yes":
                     booster = True
 
-        new_patient = Patient(new_id, len(self.patient_list)+1, firstname, lastname,
-                              date_of_birth, str(first_dose).upper(), str(second_dose).upper(), str(booster).upper())
+        new_patient = Patient(new_id, len(self.patient_list)+1,
+                              firstname, lastname,
+                              date_of_birth, str(first_dose).upper(),
+                              str(second_dose).upper(), str(booster).upper())
         self.patient_list.append(new_patient)
-        print(new_patient.firstname)
-        print(new_patient.first_dose)
-        print(new_patient.second_dose)
-        print(new_patient.booster_dose)
-        print(first_dose)
-        print(second_dose)
-        print(booster)
 
         newdata = [new_id, firstname, lastname,
                    date_of_birth, first_dose, second_dose, booster]
@@ -152,7 +147,6 @@ class Clinic:
         # need success condition, message
         input("Added! Hit the enter key to return to the main menu: ")
         self.main_menu()
-        
 
     def generate_new_id(self):
         new_id = randint(100000, 999999)
@@ -209,13 +203,14 @@ class Clinic:
         # print(colored(self.header("*** At Risk Patients*** \n"), 'green'))
         print(colored("*** At Risk Patients ***\n", 'green'))
 
-        # sort table here 
-        self.patient_list.sort(key=lambda x:x.age(), reverse=True) 
-        self.patient_list.sort(key=lambda x:(x.first_dose + x.second_dose + x.booster_dose)) 
+        # sort table here
+        self.patient_list.sort(key=lambda x: x.age(), reverse=True)
+        self.patient_list.sort(key=lambda x: (
+            x.first_dose + x.second_dose + x.booster_dose))
 
         patient_table = TableView(self.patient_list, 0)
         patient_table.print_table()
-        
+
         viewing_page = True
         while viewing_page is True:
 
@@ -241,32 +236,35 @@ class Clinic:
                 print(colored("*** At Risk Patients ***\n", 'green'))
                 patient_table.page_number -= 1
                 patient_table.print_table()
-            
-        
+
         self.main_menu()
 
     def view_all_patients(self):
         self.clear_display()
-        
+
         # self.patient_list = self.load_patients()
         # print(colored(self.header("*** At Risk Patients*** \n"), 'green'))
         print(colored("*** View All Patients ***\n", 'green'))
 
         # sort table here
-        self.patient_list.sort(key=lambda x:x.lastname) 
-       
+        self.patient_list.sort(key=lambda x: x.lastname)
+
         patient_table = TableView(self.patient_list, 0)
         patient_table.print_table()
-        
+
         viewing_page = True
         while viewing_page is True:
 
             if patient_table.page_number < 1:
-                menu = ['Next Page', 'Update Patient Details', 'Delete Patient', 'Main Menu']
+                menu = ['Next Page', 'Update Patient Details',
+                        'Delete Patient', 'Main Menu']
             elif patient_table.page_number + 1 == patient_table.max_pages:
-                menu = ['Previous Page', 'Update Patient Details', 'Delete Patient', 'Main Menu']
+                menu = ['Previous Page', 'Update Patient Details',
+                        'Delete Patient', 'Main Menu']
             else:
-                menu = ['Next Page', 'Previous Page', 'Update Patient Details', 'Delete Patient','Main Menu']
+                menu = ['Next Page', 'Previous Page',
+                        'Update Patient Details',
+                        'Delete Patient', 'Main Menu']
 
             response = pyip.inputMenu(menu, numbered=True)
 
@@ -283,28 +281,45 @@ class Clinic:
                 print(colored("*** View All Patients ***\n", 'green'))
                 patient_table.print_table()
                 are_you_sure = pyip.inputYesNo(
-                "Are you sure you want to delete a patient from the system? Type Yes(Y) or No(N): ")
+                    "Are you sure you want to delete a patient from the system? Type Yes(Y) or No(N): ")
                 if are_you_sure == 'no':
                     self.main_menu()
-                
-                to_delete = pyip.inputInt(
-                prompt="Enter the number of the patient you want to delete: ", min=1, lessThan=len(self.patient_list)+1)
 
-                
+                to_delete = pyip.inputInt(
+                    prompt="Enter the number of the patient you want to delete: ",
+                    min=1, lessThan=len(self.patient_list)+1)
+
                 info = SHEET.worksheet('data')
-                info.delete_row(self.patient_list[int(to_delete)-1].sheet_index)
+                info.delete_row(
+                    self.patient_list[int(to_delete)-1].sheet_index)
                 del self.patient_list[int(to_delete)-1]
                 input("Hit the enter key to return to the main menu: ")
                 self.main_menu()
 
+            if response == "Update Patient":
+                self.clear_display()
+                print(colored("*** View All Patients ***\n", 'green'))
+                patient_table.print_table()
+                are_you_sure = pyip.inputYesNo(
+                    "Are you sure you want to update a patient's details? Type Yes(Y) or No(N): ")
+                if are_you_sure == 'no':
+                    self.main_menu()
 
+                to_delete = pyip.inputInt(
+                    prompt="Enter the number of the patient you want to update: ",
+                    min=1, lessThan=len(self.patient_list)+1)
 
-            
+                info = SHEET.worksheet('data')
+                info.delete_row(
+                    self.patient_list[int(to_delete)-1].sheet_index)
+                del self.patient_list[int(to_delete)-1]
+                input("Hit the enter key to return to the main menu: ")
+                self.main_menu()
+
             if response == "Previous Page":
                 self.clear_display()
                 print(colored("*** View All Patients ***\n", 'green'))
                 patient_table.page_number -= 1
                 patient_table.print_table()
-            
-        
+
         self.main_menu()
