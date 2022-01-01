@@ -11,7 +11,7 @@ class TableView():
         x.field_names = ["Number", "First Name", "Last Name", "Age", "Dose 1", "Dose 2", "Booster"]
         x._max_width = {"First Name":20, "Last Name":20 }
         
-        for a in self.patient_data[1:]:
+        for a in self.patient_data[1:11]:
             # print(getattr(a, 'firstname'))
             new_row = []
             new_row.append(1234)
@@ -29,8 +29,8 @@ class TableView():
         
         # print("+" + ("-")*8 + "+" + ("-")*20 + "+" + ("-")*20 + "+" + ("-")*8 + "+" + ("-")*6 + "+" + ("-")*6 + "+" + ("-")*6 + "+")
         
-        # print(x)
-        print(x.get_string(start=1,end=6))
+        print(x)
+        #print(x.get_string(start=1,end=6))
         
 
 
