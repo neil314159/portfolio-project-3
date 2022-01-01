@@ -199,19 +199,27 @@ class Clinic:
         print(colored(self.header("At Risk Patients"), 'green'))
 
 
-        new_table = TableView(self.patient_list, 0)
-        new_table.print_table()
-        new_table.page_number = 1
-        print(new_table.page_number)
+        patient_table = TableView(self.patient_list, 0)
+        
+        patient_table.page_number = 0
+        print(patient_table.page_number)
+        viewing_page = True
+        while viewing_page is True:
 
-        # response = pyip.inputMenu(['Next Page', 'View At Risk Patients', 'View All Patients',
-        #                            'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
+            if patient_table.page_number < 1:
+                menu = ['Next Page', 'Main Menu']
+            else:
+                menu = ['Previous Page', 'Next Page', 'Main Menu']
 
-        # if response == "Guide":
-        #     self.show_guide()
-        # if response == "View At Risk Patients":
-        #     self.clear_display()
-        #     self.view_at_risk_patients()
+            response = pyip.inputMenu(menu, numbered=True)
+
+            if response == "Main Menu":
+                print("here")
+                viewing_page = False
+            if response == "Next Page":
+                self.clear_display()
+                patient_table.print_table()
+            
         # if response == "View All Patients":
         #     self.clear_display()
         #     new_table = TableView(self.patient_list, 0)
@@ -221,7 +229,7 @@ class Clinic:
         # if response == "Enroll New Patient":
         #     self.add_new_patient()
 
-        input("Hit the enter key to return to the main menu: ")
+        
         self.main_menu()
 
     def view_all_patients(self):
