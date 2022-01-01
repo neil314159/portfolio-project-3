@@ -106,30 +106,38 @@ class Clinic:
         if are_you_sure == 'no': self.main_menu()
         
         new_id = self.generate_new_id()
-                
-
+    
+        firstname = pyip.inputStr('Enter First name\n')
+        lastname = pyip.inputStr('Enter last name\n')
         
+        day = pyip.inputInt(prompt="Enter day of birth... ", min=0, lessThan=31)
+        month = pyip.inputInt(prompt="Enter amonth of birth ", min=0, lessThan=13)
+        year = pyip.inputInt(prompt="Enter year of birth ", min=0, lessThan=datetime.now().year)
+        date_of_birth = str(day)+"/" + str(month)+"/" + str(year)
 
-        # if(are_you_sure == "yes")
+        first_dose = second_dose = booster = False
+        first_dose_prompt = pyip.inputYesNo("Has the patient had their first vaccine dose? Type Yes(Y) or No(N): ")
 
-        #response = pyip.inputDate('Enter DOB', formats=('%d/%m/%y'))
-        # firstname = pyip.inputStr('Enter First name\n')
-        # lastname = pyip.inputStr('Enter last name\n')
+        if first_dose_prompt == "yes":
+            first_dose = True
+            second_dose_prompt = pyip.inputYesNo("Has the patient had their second vaccine dose? Type Yes(Y) or No(N): ")
+            if second_dose_prompt == "yes":
+                second_dose = True
+                booster_prompt = pyip.inputYesNo("Has the patient had their booster? Type Yes(Y) or No(N): ")
+                if booster_prompt == "yes":
+                    booster = True
+
+        new_patient = Patient(new_id, firstname, lastname,
+                            date_of_birth, first_dose, second_dose, booster)
+        self.patient_list.append(new_patient)
         
-        # day = pyip.inputInt(prompt="Enter day of birth... ", min=0, lessThan=31)
-        # month = pyip.inputInt(prompt="Enter amonth of birth ", min=0, lessThan=13)
-        # year = pyip.inputInt(prompt="Enter year of birth ", min=0, lessThan=datetime.now().year)
-        # date_of_birth = str(day)+"/" + str(month)+"/" + str(year)
+        newdata = [new_id, firstname, lastname,
+                            date_of_birth, first_dose, second_dose, booster]
 
-        # first_dose = pyip.inputYesNo("Has the patient had their first vaccine dose? Type Yes(Y) or No(N): ")
-
-        # new_patient = Patient(1, firstname, lastname,
-        #                     date_of_birth, True, True, True)
-        # info = SHEET.worksheet('data')
-        # newdata = [1, firstname, lastname, date_of_birth, True, True, True]
-        # info.append_row(newdata)
+        info = SHEET.worksheet('data')
+        info.append_row(newdata)
         
-        # self.main_menu()
+        self.main_menu()
         
     def generate_new_id(self):
         new_id = randint(100000, 999999) 
