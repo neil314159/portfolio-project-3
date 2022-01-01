@@ -35,7 +35,7 @@ class Clinic:
 
         for index, a in enumerate(data):
             patient_list.append(
-                Patient(a[0], index, a[1], a[2], a[3], a[4], a[5], a[6]))
+                Patient(a[0], index+1, a[1], a[2], a[3], a[4], a[5], a[6]))
 
         return patient_list
 
@@ -132,9 +132,16 @@ class Clinic:
                 if booster_prompt == "yes":
                     booster = True
 
-        new_patient = Patient(new_id, firstname, lastname,
-                              date_of_birth, first_dose, second_dose, booster)
+        new_patient = Patient(new_id, len(self.patient_list)+1, firstname, lastname,
+                              date_of_birth, str(first_dose).upper(), str(second_dose).upper(), str(booster).upper())
         self.patient_list.append(new_patient)
+        print(new_patient.firstname)
+        print(new_patient.first_dose)
+        print(new_patient.second_dose)
+        print(new_patient.booster_dose)
+        print(first_dose)
+        print(second_dose)
+        print(booster)
 
         newdata = [new_id, firstname, lastname,
                    date_of_birth, first_dose, second_dose, booster]
@@ -143,8 +150,9 @@ class Clinic:
         info.append_row(newdata)
 
         # need success condition, message
-
+        input("Added! Hit the enter key to return to the main menu: ")
         self.main_menu()
+        
 
     def generate_new_id(self):
         new_id = randint(100000, 999999)
@@ -156,6 +164,9 @@ class Clinic:
                 new_id_found = True
 
         return new_id
+
+    def delete_user(self):
+        print("test")
 
     def calculate_vaxed(self):
 
@@ -270,8 +281,25 @@ class Clinic:
             if response == "Delete Patient":
                 self.clear_display()
                 print(colored("*** View All Patients ***\n", 'green'))
-                patient_table.page_number += 1
                 patient_table.print_table()
+                are_you_sure = pyip.inputYesNo(
+                "Are you sure you want to delete a patient from the system? Type Yes(Y) or No(N): ")
+                if are_you_sure == 'no':
+                    self.main_menu()
+                
+                to_delete = pyip.inputInt(
+                prompt="Enter the number of the patient you want to delete: ", min=1, lessThan=len(self.patient_list)+1)
+
+                
+                info = SHEET.worksheet('data')
+                info.delete_row(self.patient_list[int(to_delete)-1].sheet_index)
+                del self.patient_list[int(to_delete)-1]
+                input("Hit the enter key to return to the main menu: ")
+                self.main_menu()
+
+
+
+            
             if response == "Previous Page":
                 self.clear_display()
                 print(colored("*** View All Patients ***\n", 'green'))

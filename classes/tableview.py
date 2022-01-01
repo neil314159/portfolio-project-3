@@ -31,16 +31,12 @@ class TableView():
             new_row.append(getattr(patient, 'lastname'))
             new_row.append(patient.age())
 
-            new_row.append(green_yes) if((getattr(patient, 'first_dose'))
-                                         == "TRUE") else new_row.append(red_no)
-            new_row.append(green_yes) if((getattr(patient, 'second_dose'))
-                                         == "TRUE") else new_row.append(red_no)
-            new_row.append(green_yes) if(
-                (getattr(patient, 'booster_dose')) == "TRUE") else new_row.append(red_no)
+            new_row.append(green_yes) if((getattr(patient, 'first_dose')) == "TRUE") else new_row.append(red_no)
+            new_row.append(green_yes) if((getattr(patient, 'second_dose')) == "TRUE") else new_row.append(red_no)
+            new_row.append(green_yes) if((getattr(patient, 'booster_dose')) == "TRUE") else new_row.append(red_no)
 
             patient_view.add_row(new_row)
         print(colored(f'Page number: {self.page_number+1}', 'yellow'))
         print(patient_view)
 
-    def next_page(self):
-        self.page_number += 1
+    
