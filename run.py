@@ -139,7 +139,7 @@ def calculate_vaxed():
 
 
 def mainmenu():
-    response = pyip.inputMenu(['Home', 'View Patients', 'Add New Patient', 'Update Patient Details', 'View Dashboard', 'View Instructions'], numbered=True)
+    response = pyip.inputMenu(['Guide', 'View At Risk Patients', 'View All Patients', 'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
     if response == "Home":
         os.system('clear')
         print(welcome("covid! extra long strong what happens"))
@@ -180,7 +180,7 @@ def main():
     #print(pb)
     # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
     os.system('clear')
-    print(colored(welcome("CPT!"), 'green'))
+    print(colored(welcome("View patients"), 'green'))
 
     #for a in patient_list:
     #    print(getattr(a, 'firstname'))
