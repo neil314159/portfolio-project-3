@@ -6,7 +6,7 @@ from datetime import datetime
 import pyinputplus as pyip
 import os
 from classes.mixins import ManageDisplay
-
+from termcolor import colored, cprint
 
 
 from pyfiglet import Figlet
@@ -36,6 +36,8 @@ def welcome(text):
 
 def show_instructions():
     os.system('clear')
+    text = colored('Hello, World!', 'red', attrs=['reverse', 'blink'])
+    print(text)
     print(
             'The Covid Vacination Manager allows you to keep track \n'
             'of the vaccination status of a list of patients \n'
@@ -178,7 +180,7 @@ def main():
     #print(pb)
     # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
     os.system('clear')
-    print(welcome("CPT!"))
+    print(colored(welcome("CPT!"), 'green'))
 
     #for a in patient_list:
     #    print(getattr(a, 'firstname'))
