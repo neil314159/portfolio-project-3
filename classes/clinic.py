@@ -54,7 +54,7 @@ class Clinic:
 
     def main_menu(self):
         self.clear_display()
-        print(colored(self.header("Patient Vaccine Tracker"), 'green'))
+        print(colored(self.header("Vaccine Clinic Tracker"), 'green'))
         response = pyip.inputMenu(['Guide', 'View At Risk Patients', 'View All Patients',
                                    'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
 
