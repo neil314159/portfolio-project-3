@@ -198,11 +198,10 @@ class Clinic:
         self.clear_display()
         print(colored(self.header("At Risk Patients"), 'green'))
 
-
+        # sort table here 
         patient_table = TableView(self.patient_list, 0)
+        patient_table.print_table()
         
-        patient_table.page_number = 0
-        print(patient_table.page_number)
         viewing_page = True
         while viewing_page is True:
 
@@ -218,6 +217,11 @@ class Clinic:
                 viewing_page = False
             if response == "Next Page":
                 self.clear_display()
+                patient_table.page_number += 1
+                patient_table.print_table()
+            if response == "Previous Page":
+                self.clear_display()
+                patient_table.page_number -= 1
                 patient_table.print_table()
             
         # if response == "View All Patients":

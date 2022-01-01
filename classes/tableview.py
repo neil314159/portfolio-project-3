@@ -19,7 +19,7 @@ class TableView():
 
     #     for i, elm in enumerate(test_list[7:40], 7):
     # print i, elm stack overflow
-    
+
         for i, patient in enumerate(self.patient_data[21:31], 21):
             new_row = []
             new_row.append(i)
@@ -35,7 +35,7 @@ class TableView():
                 (getattr(patient, 'booster_dose')) == "TRUE") else new_row.append(red_no)
 
             patient_view.add_row(new_row)
-
+        print(f'Page number: {self.page_number+1}')
         print(patient_view)
 
     def next_page(self):
