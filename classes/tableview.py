@@ -1,5 +1,5 @@
 from prettytable import PrettyTable
-from termcolor import colored, cprint
+from termcolor import colored
 
 
 class TableView():
@@ -17,27 +17,26 @@ class TableView():
         green_yes = colored('Yes', 'green')
         red_no = colored("NO", 'white', 'on_red')
 
-        for a in self.patient_data[1:11]:
-            # print(getattr(a, 'firstname'))
+    #     for i, elm in enumerate(test_list[7:40], 7):
+    # print i, elm stack overflow
+    
+        for i, patient in enumerate(self.patient_data[21:31], 21):
             new_row = []
-            new_row.append(1234)
-            new_row.append(getattr(a, 'firstname'))
-            new_row.append(getattr(a, 'lastname'))
-            new_row.append(a.age())
+            new_row.append(i)
+            new_row.append(getattr(patient, 'firstname'))
+            new_row.append(getattr(patient, 'lastname'))
+            new_row.append(patient.age())
 
-            new_row.append(green_yes) if((getattr(a, 'first_dose'))
+            new_row.append(green_yes) if((getattr(patient, 'first_dose'))
                                          == "TRUE") else new_row.append(red_no)
-            new_row.append(green_yes) if((getattr(a, 'second_dose'))
+            new_row.append(green_yes) if((getattr(patient, 'second_dose'))
                                          == "TRUE") else new_row.append(red_no)
             new_row.append(green_yes) if(
-                (getattr(a, 'booster_dose')) == "TRUE") else new_row.append(red_no)
+                (getattr(patient, 'booster_dose')) == "TRUE") else new_row.append(red_no)
 
             patient_view.add_row(new_row)
 
-        # print("+" + ("-")*8 + "+" + ("-")*20 + "+" + ("-")*20 + "+" + ("-")*8 + "+" + ("-")*6 + "+" + ("-")*6 + "+" + ("-")*6 + "+")
-
         print(patient_view)
-        # print(x.get_string(start=1,end=6))
 
     def next_page(self):
-        page_number += 1
+        self.page_number += 1

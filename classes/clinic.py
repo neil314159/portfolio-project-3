@@ -6,12 +6,12 @@ import plotext as plt
 from datetime import datetime
 import pyinputplus as pyip
 import os
-from termcolor import colored, cprint
-from prettytable import PrettyTable
+from termcolor import colored
+from random import randint
 from pyfiglet import Figlet
 from classes.patient import Patient
 from classes.tableview import TableView
-from random import randint
+
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -143,12 +143,14 @@ class Clinic:
         info = SHEET.worksheet('data')
         info.append_row(newdata)
 
+        # need success condition, message
+
         self.main_menu()
 
     def generate_new_id(self):
         new_id = randint(100000, 999999)
         new_id_found = False
-        while new_id_found == False:
+        while new_id_found is False:
             if(len([x for x in self.patient_list if (int(x.get_id()) == new_id)]) > 0):
                 new_id = randint(100000, 999999)
             else:

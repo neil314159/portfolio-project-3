@@ -1,4 +1,4 @@
-#class for patient info
+# class for patient info
 
 from datetime import datetime
 
@@ -15,20 +15,14 @@ class Patient:
         self.booster_dose = booster
 
     def age(self):
-        newdate = self.date_of_birth.split('/')
-        days = int(newdate[0])
-        months = int(newdate[1])
-        years = int(newdate[2])
-
+        date_of_birth = self.date_of_birth.split('/')
+        days = int(date_of_birth[0])
+        months = int(date_of_birth[1])
+        years = int(date_of_birth[2])
         today = datetime.today()
-
         difference = ((today.month, today.day) < (months, days))
+        age = today.year - years - int(difference)
+        return age
 
-        bday = today.year - years - int(difference)
-        # print(bday)
-
-        return bday
-    
     def get_id(self):
-        
         return int(self.id)
