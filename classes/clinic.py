@@ -65,8 +65,7 @@ class Clinic:
             self.view_at_risk_patients()
         if response == "View All Patients":
             self.clear_display()
-            new_table = TableView(self.patient_list, 0)
-            new_table.print_table()
+            self.view_all_patients()()
         if response == "View Progress Dashboard":
             self.show_dashboard()
         if response == "Enroll New Patient":
@@ -196,9 +195,11 @@ class Clinic:
 
     def view_at_risk_patients(self):
         self.clear_display()
-        print(colored(self.header("At Risk Patients"), 'green'))
+        # print(colored(self.header("*** At Risk Patients*** \n"), 'green'))
+        print(colored("*** At Risk Patients ***\n", 'green'))
 
         # sort table here 
+
         patient_table = TableView(self.patient_list, 0)
         patient_table.print_table()
         
@@ -207,6 +208,8 @@ class Clinic:
 
             if patient_table.page_number < 1:
                 menu = ['Next Page', 'Main Menu']
+            elif patient_table.page_number + 1 == patient_table.max_pages:
+                menu = ['Previous Page', 'Main Menu']
             else:
                 menu = ['Next Page', 'Previous Page', 'Main Menu']
 
@@ -217,25 +220,53 @@ class Clinic:
                 viewing_page = False
             if response == "Next Page":
                 self.clear_display()
+                print(colored("*** At Risk Patients ***\n", 'green'))
                 patient_table.page_number += 1
                 patient_table.print_table()
             if response == "Previous Page":
                 self.clear_display()
+                print(colored("*** At Risk Patients ***\n", 'green'))
                 patient_table.page_number -= 1
                 patient_table.print_table()
             
-        # if response == "View All Patients":
-        #     self.clear_display()
-        #     new_table = TableView(self.patient_list, 0)
-        #     new_table.print_table()
-        # if response == "View Progress Dashboard":
-        #     self.show_dashboard()
-        # if response == "Enroll New Patient":
-        #     self.add_new_patient()
-
         
         self.main_menu()
 
     def view_all_patients(self):
         self.clear_display()
-        print("test")
+        # print(colored(self.header("*** At Risk Patients*** \n"), 'green'))
+        print(colored("*** View All Patients ***\n", 'green'))
+
+        # sort table here 
+
+        patient_table = TableView(self.patient_list, 0)
+        patient_table.print_table()
+        
+        viewing_page = True
+        while viewing_page is True:
+
+            if patient_table.page_number < 1:
+                menu = ['Next Page', 'Update Patient Details', 'Delete Patient', 'Main Menu']
+            elif patient_table.page_number + 1 == patient_table.max_pages:
+                menu = ['Previous Page', 'Update Patient Details', 'Delete Patient', 'Main Menu']
+            else:
+                menu = ['Next Page', 'Previous Page', 'Update Patient Details', 'Delete Patient','Main Menu']
+
+            response = pyip.inputMenu(menu, numbered=True)
+
+            if response == "Main Menu":
+                print("here")
+                viewing_page = False
+            if response == "Next Page":
+                self.clear_display()
+                print(colored("*** View All Patients ***\n", 'green'))
+                patient_table.page_number += 1
+                patient_table.print_table()
+            if response == "Previous Page":
+                self.clear_display()
+                print(colored("*** View All Patients ***\n", 'green'))
+                patient_table.page_number -= 1
+                patient_table.print_table()
+            
+        
+        self.main_menu()

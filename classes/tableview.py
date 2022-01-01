@@ -1,11 +1,13 @@
 from prettytable import PrettyTable
 from termcolor import colored
+import math
 
 
 class TableView():
     def __init__(self, patient_data, page_number):
         self.patient_data = patient_data
         self.page_number = page_number
+        self.max_pages = math.ceil(len(self.patient_data)/10)
 
     def print_table(self):
 
@@ -37,7 +39,7 @@ class TableView():
                 (getattr(patient, 'booster_dose')) == "TRUE") else new_row.append(red_no)
 
             patient_view.add_row(new_row)
-        print(f'Page number: {self.page_number+1}')
+        print(colored(f'Page number: {self.page_number+1}', 'yellow'))
         print(patient_view)
 
     def next_page(self):
