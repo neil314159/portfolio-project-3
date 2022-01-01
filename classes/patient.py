@@ -5,8 +5,8 @@ from datetime import datetime
 
 class Patient:
 
-    def __init__(self, id, firstname, lastname, date_of_birth, first_dose, second_dose, booster):
-        self.id = id
+    def __init__(self, user_id, firstname, lastname, date_of_birth, first_dose, second_dose, booster):
+        self.id = user_id
         self.firstname = firstname
         self.lastname = lastname
         self.date_of_birth = date_of_birth
@@ -25,7 +25,7 @@ class Patient:
         difference = ((today.month, today.day) < (months, days))
 
         bday = today.year - years - int(difference)
-        #print(bday)
+        # print(bday)
 
         return bday
     
