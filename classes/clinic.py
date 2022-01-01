@@ -116,8 +116,8 @@ class Clinic:
 
         plt.bar(pizzas, percentages, orientation = "horizontal", width = 0.3) # or shorter orientation = 'h'
         plt.title("Vaccination Status For All Patients")
-        # plt.clc() # to remove colors
-        # plt.plotsize(100, 2 * len(pizzas) - 1 + 4) # 4 = 1 for x numerical ticks + 2 for x axes + 1 for title
+        plt.clc() # to remove colors
+        plt.plotsize(100, 2 * len(pizzas) - 1 + 4) # 4 = 1 for x numerical ticks + 2 for x axes + 1 for title
         plt.show()
     
         input("\n Hit enter key to return to main menu")
