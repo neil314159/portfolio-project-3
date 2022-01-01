@@ -9,6 +9,7 @@ class TableView():
         
         x = PrettyTable()
         x.field_names = ["Number", "First Name", "Last Name", "Age", "1st Dose", "2nd Dose", "Booster"]
+        x.max_width = 60
         for a in self.patient_data[1:11]:
             # print(getattr(a, 'firstname'))
             new_row = []
