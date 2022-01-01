@@ -22,9 +22,9 @@ class TableView():
             new_row.append(a.age())
             
 
-            new_row.append("\U0001F600") if((getattr(a, 'first_dose'))=="TRUE") else new_row.append(colored("NO", 'red'))
-            new_row.append("\u2705") if((getattr(a, 'second_dose'))=="TRUE") else new_row.append("N")
-            new_row.append("\u2705") if((getattr(a, 'booster_dose'))=="TRUE") else new_row.append("N")
+            new_row.append("YES") if((getattr(a, 'first_dose'))=="TRUE") else new_row.append(colored("NO", 'red', 'on_cyan'))
+            new_row.append("YES") if((getattr(a, 'second_dose'))=="TRUE") else new_row.append("N")
+            new_row.append("YES") if((getattr(a, 'booster_dose'))=="TRUE") else new_row.append("N")
            
             x.add_row(new_row)
         
@@ -34,7 +34,7 @@ class TableView():
                  ["Moon",1737,73.5],["Mars",3390,641.85]]
         headers = ["item", "qty"]
         print(tabulate(table, headers, tablefmt="fancy_grid"))
-        # print(x)
+        print(x)
         #print(x.get_string(start=1,end=6))
         
 
