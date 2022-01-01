@@ -1,5 +1,6 @@
 from prettytable import PrettyTable
 from termcolor import colored, cprint
+from tabulate import tabulate
 
 class TableView():
     def __init__(self, patient_data, page_number):
@@ -29,8 +30,11 @@ class TableView():
         
         
         # print("+" + ("-")*8 + "+" + ("-")*20 + "+" + ("-")*20 + "+" + ("-")*8 + "+" + ("-")*6 + "+" + ("-")*6 + "+" + ("-")*6 + "+")
-        
-        print(x)
+        table = [["✅",696000,1989100000],["Earth",6371,5973.6],
+                 ["Moon",1737,73.5],["Mars",3390,641.85]]
+        headers = ["item", "qty"]
+        print(tabulate(table, headers, tablefmt="fancy_grid"))
+        # print(x)
         #print(x.get_string(start=1,end=6))
         
 
