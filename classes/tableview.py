@@ -1,6 +1,8 @@
 from prettytable import PrettyTable
 from termcolor import colored, cprint
 from tabulate import tabulate
+from rich.table import Table
+from rich import print
 
 class TableView():
     def __init__(self, patient_data, page_number):
@@ -22,7 +24,7 @@ class TableView():
             new_row.append(a.age())
             
 
-            new_row.append("YES") if((getattr(a, 'first_dose'))=="TRUE") else new_row.append(colored("NO", 'red', 'on_cyan'))
+            new_row.append("YES") if((getattr(a, 'first_dose'))=="TRUE") else new_row.append("NO")
             new_row.append("YES") if((getattr(a, 'second_dose'))=="TRUE") else new_row.append("N")
             new_row.append("YES") if((getattr(a, 'booster_dose'))=="TRUE") else new_row.append("N")
            
@@ -30,10 +32,21 @@ class TableView():
         
         
         # print("+" + ("-")*8 + "+" + ("-")*20 + "+" + ("-")*20 + "+" + ("-")*8 + "+" + ("-")*6 + "+" + ("-")*6 + "+" + ("-")*6 + "+")
-        table = [["✅",696000,1989100000],["Earth",6371,5973.6],
-                 ["Moon",1737,73.5],["Mars",3390,641.85]]
-        headers = ["item", "qty"]
-        print(tabulate(table, headers, tablefmt="fancy_grid"))
+        
+
+        table = Table(title="Star Wars Movies")
+
+        table.add_column("Released", justify="right", style="cyan", no_wrap=True)
+        table.add_column("Title", style="magenta")
+        table.add_column("Box Office", justify="right", style="green")
+
+        table.add_row("Dec 20, 2019", "Star Wars: The Rise of Skywalker", "$952,110,690")
+        table.add_row("May 25, 2018", "✅", "$393,151,347")
+        table.add_row("Dec 15, 2017", "Star Wars Ep. V111: The Last Jedi", "$1,332,539,889")
+        table.add_row("Dec 16, 2016", "Rogue One: A Star Wars Story", "$1,332,439,889")
+
+        print(table)
+       
         print(x)
         #print(x.get_string(start=1,end=6))
         
