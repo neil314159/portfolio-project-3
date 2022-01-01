@@ -29,15 +29,15 @@ class Clinic:
 
     def load_patients(self):
 
-        patient_list2 = []
+        patient_list = []
         info = SHEET.worksheet('data')
         data = info.get_all_values()
 
-        for a in data:
-            patient_list2.append(
-                Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6]))
+        for index, a in enumerate(data):
+            patient_list.append(
+                Patient(a[0], index, a[1], a[2], a[3], a[4], a[5], a[6]))
 
-        return patient_list2
+        return patient_list
 
     def header(self, text):
         result = Figlet()
@@ -199,6 +199,8 @@ class Clinic:
         print(colored("*** At Risk Patients ***\n", 'green'))
 
         # sort table here 
+        self.patient_list.sort(key=lambda x:x.age(), reverse=True) 
+        self.patient_list.sort(key=lambda x:(x.first_dose + x.second_dose + x.booster_dose)) 
 
         patient_table = TableView(self.patient_list, 0)
         patient_table.print_table()
@@ -234,11 +236,14 @@ class Clinic:
 
     def view_all_patients(self):
         self.clear_display()
+        
+        # self.patient_list = self.load_patients()
         # print(colored(self.header("*** At Risk Patients*** \n"), 'green'))
         print(colored("*** View All Patients ***\n", 'green'))
 
-        # sort table here 
-
+        # sort table here
+        self.patient_list.sort(key=lambda x:x.lastname) 
+       
         patient_table = TableView(self.patient_list, 0)
         patient_table.print_table()
         
@@ -258,6 +263,11 @@ class Clinic:
                 print("here")
                 viewing_page = False
             if response == "Next Page":
+                self.clear_display()
+                print(colored("*** View All Patients ***\n", 'green'))
+                patient_table.page_number += 1
+                patient_table.print_table()
+            if response == "Delete Patient":
                 self.clear_display()
                 print(colored("*** View All Patients ***\n", 'green'))
                 patient_table.page_number += 1

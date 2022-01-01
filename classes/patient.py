@@ -5,8 +5,9 @@ from datetime import datetime
 
 class Patient:
 
-    def __init__(self, user_id, firstname, lastname, date_of_birth, first_dose, second_dose, booster):
+    def __init__(self, user_id, sheet_index, firstname, lastname, date_of_birth, first_dose, second_dose, booster):
         self.id = user_id
+        self.sheet_index = sheet_index
         self.firstname = firstname
         self.lastname = lastname
         self.date_of_birth = date_of_birth
