@@ -20,9 +20,9 @@ class TableView():
             new_row.append(a.age())
             
 
-            new_row.append(" ✅") if((getattr(a, 'first_dose'))=="TRUE") else new_row.append("N")
-            new_row.append(" ✅") if((getattr(a, 'second_dose'))=="TRUE") else new_row.append("N")
-            new_row.append(" ✅") if((getattr(a, 'booster_dose'))=="TRUE") else new_row.append("N")
+            new_row.append("\u2705") if((getattr(a, 'first_dose'))=="TRUE") else new_row.append("N")
+            new_row.append("\u2705") if((getattr(a, 'second_dose'))=="TRUE") else new_row.append("N")
+            new_row.append("\u2705") if((getattr(a, 'booster_dose'))=="TRUE") else new_row.append("N")
            
             x.add_row(new_row)
         
