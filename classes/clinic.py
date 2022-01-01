@@ -103,6 +103,8 @@ class Clinic:
         # print('\n')
         # print(return_progress_bar(two, "70% second dose"))
 
+
+
         # print('\n')
         # print(return_progress_bar(three, "60% have booster"))
 
