@@ -15,7 +15,6 @@ from prettytable import PrettyTable
 
 from pyfiglet import Figlet
 from classes.patient import Patient
-from classes.progressbar import ProgressBar
 from classes.tableview import TableView
 
 SCOPE = [
@@ -64,7 +63,7 @@ class Clinic:
 
 
     def main_menu(self):
-
+        self.clear_display()
         print(colored(self.welcome("Patient Vaccine Tracker"), 'green'))
         response = pyip.inputMenu(['Guide', 'View At Risk Patients', 'View All Patients',
                                    'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
@@ -110,15 +109,21 @@ class Clinic:
 
         # print('\n')
 
+        pizzas = ["Booster", "2nd Dose", "1st Dose"]
+        percentages = [71, 82, 92]
 
-        pizzas = ["First Dose", "Second Dose", "Booster"]
-        percentages = [90, 80, 60 ]
-
-        plt.bar(pizzas, percentages, orientation = "horizontal", width = 0.3) # or shorter orientation = 'h'
-        plt.title("Vaccination Status For All Patients")
+        plt.bar(pizzas, percentages, orientation = "horizontal") # or shorter orientation = 'h'
+        plt.xticks([0,25,75,100])
+        plt.xlim(0,100)
+        plt.title("Vaccination Status")
         plt.clc() # to remove colors
-        plt.plotsize(100, 2 * len(pizzas) - 1 + 4) # 4 = 1 for x numerical ticks + 2 for x axes + 1 for title
+        plt.plotsize(70, 20) # 4 = 1 for x numerical ticks + 2 for x axes + 1 for title
         plt.show()
+
+
+        
+ 
+#
     
         input("\n Hit enter key to return to main menu")
         #pause("Press any key to return to the main menu")
