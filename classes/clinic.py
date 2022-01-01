@@ -2,17 +2,12 @@
 
 import gspread
 from google.oauth2.service_account import Credentials
-
 import plotext as plt
-
-
 from datetime import datetime
 import pyinputplus as pyip
 import os
-from classes.mixins import ManageDisplay
 from termcolor import colored, cprint
 from prettytable import PrettyTable
-
 from pyfiglet import Figlet
 from classes.patient import Patient
 from classes.tableview import TableView

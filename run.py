@@ -11,7 +11,7 @@ from prettytable import PrettyTable
 
 from pyfiglet import Figlet
 from classes.patient import Patient
-from classes.progressbar import ProgressBar
+
 
 from classes.clinic import Clinic
 
