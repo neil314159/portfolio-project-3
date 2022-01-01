@@ -3,6 +3,9 @@
 import gspread
 from google.oauth2.service_account import Credentials
 
+import plotext as plt
+
+
 from datetime import datetime
 import pyinputplus as pyip
 import os
@@ -62,7 +65,7 @@ class Clinic:
 
     def main_menu(self):
 
-        print(colored(self.welcome("Covid Vaccine Manager"), 'green'))
+        print(colored(self.welcome("Patient Vaccine Tracker"), 'green'))
         response = pyip.inputMenu(['Guide', 'View At Risk Patients', 'View All Patients',
                                    'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
         if response == "Home":
@@ -91,19 +94,29 @@ class Clinic:
     
         print(colored(self.welcome(" Dashboard"), 'green'))
 
-        print('\n')
-        print(return_progress_bar(20, "90% fully vaccinated"))
+        # print('\n')
+        # print(return_progress_bar(20, "90% fully vaccinated"))
 
-        print('\n')
-        print(return_progress_bar(one, "80% first dose"))
+        # print('\n')
+        # print(return_progress_bar(one, "80% first dose"))
 
-        print('\n')
-        print(return_progress_bar(two, "70% second dose"))
+        # print('\n')
+        # print(return_progress_bar(two, "70% second dose"))
 
-        print('\n')
-        print(return_progress_bar(three, "60% have booster"))
+        # print('\n')
+        # print(return_progress_bar(three, "60% have booster"))
 
-        print('\n')
+        # print('\n')
+
+
+        pizzas = ["First Dose", "Second Dose", "Booster"]
+        percentages = [90, 80, 60 ]
+
+        plt.bar(pizzas, percentages, orientation = "horizontal", width = 0.3) # or shorter orientation = 'h'
+        plt.title("Vaccination Status For All Patients")
+        # plt.clc() # to remove colors
+        # plt.plotsize(100, 2 * len(pizzas) - 1 + 4) # 4 = 1 for x numerical ticks + 2 for x axes + 1 for title
+        plt.show()
     
         input("\n Hit enter key to return to main menu")
         #pause("Press any key to return to the main menu")
