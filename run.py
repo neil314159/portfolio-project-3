@@ -140,7 +140,7 @@ def mainmenu():
     response = pyip.inputMenu(['Home', 'View Patients', 'Add New Patient', 'Update Patient Details', 'View Dashboard', 'View Instructions'], numbered=True)
     if response == "Home":
         os.system('clear')
-        print(welcome("covid!"))
+        print(welcome("covid! extra long strong what happens"))
         
         #calculate_vaxed()
         mainmenu()
