@@ -117,7 +117,7 @@ class Clinic:
         plt.xlim(0,100)
         plt.title("Vaccination Status")
         plt.clc() # to remove colors
-        plt.plotsize(50, 10) # 4 = 1 for x numerical ticks + 2 for x axes + 1 for title
+        plt.plotsize(60, 6) # 4 = 1 for x numerical ticks + 2 for x axes + 1 for title
         plt.show()
 
 
