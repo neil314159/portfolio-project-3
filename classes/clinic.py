@@ -64,8 +64,7 @@ class Clinic:
             self.show_guide()
         if response == "View At Risk Patients":
             self.clear_display()
-            new_table = TableView(self.patient_list, 0)
-            new_table.print_table()
+            self.view_at_risk_patients()
         if response == "View All Patients":
             self.clear_display()
             new_table = TableView(self.patient_list, 0)
@@ -77,25 +76,24 @@ class Clinic:
         
     def show_dashboard(self):     
         self.clear_display()
-        one, two, three = self.calculate_vaxed()
-        #print(one)
     
         print(colored(self.header("Dashboard"), 'green'))
 
+        first_dose, second_dose, booster = self.calculate_vaxed()
        
 
-        pizzas = ["Booster", "2nd Dose", "1st Dose"]
-        percentages = [71, 82, 92]
+        bar_chart = ["Booster", "2nd Dose", "1st Dose"]
+        percentages = [booster, second_dose, first_dose]
 
-        plt.bar(pizzas, percentages, orientation = "horizontal") # or shorter orientation = 'h'
+        plt.bar(bar_chart, percentages, orientation = "horizontal") # or shorter orientation = 'h'
         plt.xticks([0,25,75,100])
         plt.xlim(0,100)
         plt.title("Vaccination Status")
         plt.clc() # to remove colors
-        plt.plotsize(60, 7) # 4 = 1 for x numerical ticks + 2 for x axes + 1 for title
+        plt.plotsize(60, 7) 
         plt.show()
     
-        input("\n Hit enter key to return to main menu")
+        input("\n Hit the enter key to return to main menu: ")
         #pause("Press any key to return to the main menu")
         self.main_menu()
 
@@ -154,26 +152,14 @@ class Clinic:
         return new_id
 
     def calculate_vaxed(self):
-            
-        firstdose = 0
-        for a in self.patient_list:
-            if (getattr(a, 'first_dose')) == "TRUE":
-                firstdose += 1
 
+        firstdose = sum(1 for p in self.patient_list if p.first_dose == "TRUE")
         totalfirstdose = (firstdose/len(self.patient_list))*100
 
-        seconddose = 0
-        for a in self.patient_list:
-            if (getattr(a, 'second_dose')) == "TRUE":
-                seconddose += 1
-
+        seconddose = sum(1 for p in self.patient_list if p.second_dose == "TRUE")
         totalseconddose = (seconddose/len(self.patient_list))*100
 
-        booster = 0
-        for a in self.patient_list:
-            if (getattr(a, 'booster_dose')) == "TRUE":
-                booster += 1
-
+        booster = sum(1 for p in self.patient_list if p.booster_dose == "TRUE") 
         totalbooster = (booster/len(self.patient_list))*100
 
         return(totalfirstdose, totalseconddose, totalbooster)
@@ -197,5 +183,17 @@ class Clinic:
             '\n'
 
         )
-        input("Hit enter key to return")
+        input("Hit the enter key to return to the main menu: ")
         self.main_menu()
+
+    def view_at_risk_patients(self):
+        self.clear_display()
+        print(colored(self.header("At Risk Patients"), 'green'))
+        new_table = TableView(self.patient_list, 0)
+        new_table.print_table()
+        input("Hit the enter key to return to the main menu: ")
+        self.main_menu()
+    
+    def view_all_patients(self):
+        self.clear_display()
+        print("test")
