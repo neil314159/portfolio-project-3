@@ -256,14 +256,14 @@ class Clinic:
         while viewing_page is True:
 
             if patient_table.page_number < 1:
-                menu = ['Next Page', 'Update Patient Details',
+                menu = ['Next Page', 'Update Vaccination Status',
                         'Delete Patient', 'Main Menu']
             elif patient_table.page_number + 1 == patient_table.max_pages:
-                menu = ['Previous Page', 'Update Patient Details',
+                menu = ['Previous Page', 'Update Vaccination Status',
                         'Delete Patient', 'Main Menu']
             else:
                 menu = ['Next Page', 'Previous Page',
-                        'Update Patient Details',
+                        'Update Vaccination Status',
                         'Delete Patient', 'Main Menu']
 
             response = pyip.inputMenu(menu, numbered=True)
@@ -296,30 +296,59 @@ class Clinic:
                 input("Hit the enter key to return to the main menu: ")
                 self.main_menu()
 
-            if response == "Update Patient":
-                self.clear_display()
-                print(colored("*** View All Patients ***\n", 'green'))
-                patient_table.print_table()
-                are_you_sure = pyip.inputYesNo(
-                    "Are you sure you want to update a patient's details? Type Yes(Y) or No(N): ")
-                if are_you_sure == 'no':
-                    self.main_menu()
-
-                to_delete = pyip.inputInt(
-                    prompt="Enter the number of the patient you want to update: ",
-                    min=1, lessThan=len(self.patient_list)+1)
-
-                info = SHEET.worksheet('data')
-                info.delete_row(
-                    self.patient_list[int(to_delete)-1].sheet_index)
-                del self.patient_list[int(to_delete)-1]
-                input("Hit the enter key to return to the main menu: ")
-                self.main_menu()
+            if response == "Update Vaccination Status":
+                self.update_patient_status(patient_table)
 
             if response == "Previous Page":
                 self.clear_display()
                 print(colored("*** View All Patients ***\n", 'green'))
                 patient_table.page_number -= 1
                 patient_table.print_table()
+
+        self.main_menu()
+
+    def update_patient_status(self, patient_table):
+        self.clear_display()
+        print(colored("*** View All Patients ***\n", 'green'))
+        patient_table.print_table()
+        are_you_sure = pyip.inputYesNo(
+                    "Are you sure you want to update a patient's status? Type Yes(Y) or No(N): ")
+        if are_you_sure == 'no':
+            self.main_menu()
+
+        to_update = pyip.inputInt(
+        prompt="Enter the number of the patient you want to update: ",
+        min=1, lessThan=len(self.patient_list)+1)
+
+                
+        first_dose = second_dose = booster = False
+        first_dose_prompt = pyip.inputYesNo(
+            "Has the patient had their first dose? Type Yes(Y) or No(N): ")
+
+        if first_dose_prompt == "yes":
+            first_dose = True
+            second_dose_prompt = pyip.inputYesNo(
+                "Has the patient had their second dose? Type Yes(Y) or No(N): ")
+            if second_dose_prompt == "yes":
+                second_dose = True
+                booster_prompt = pyip.inputYesNo(
+                    "Has the patient had their booster? Type Yes(Y) or No(N): ")
+                if booster_prompt == "yes":
+                    booster = True
+
+        self.patient_list[to_update-1].first_dose = str(first_dose).upper()
+        self.patient_list[to_update-1].second_dose = str(second_dose).upper()
+        self.patient_list[to_update-1].booster_dose = str(booster).upper()
+
+        
+
+        info = SHEET.worksheet('data')
+        info.update_cell(self.patient_list[int(to_update)-1].sheet_index, 5, str(first_dose).upper())
+        info.update_cell(self.patient_list[int(to_update)-1].sheet_index, 6, str(second_dose).upper())
+        info.update_cell(self.patient_list[int(to_update)-1].sheet_index, 7, str(booster).upper())
+
+        #         self.patient_list[int(to_delete)-1].sheet_index)
+        # del self.patient_list[int(to_delete)-1]
+        input("Hit the enter key to return to the main menu: ")
 
         self.main_menu()
