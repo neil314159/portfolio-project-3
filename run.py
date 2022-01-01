@@ -1,7 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
-import colorama
-from colorama import Fore, Back, Style
+#import colorama
+#from colorama import Fore, Back, Style
 from datetime import datetime
 import pyinputplus as pyip
 import os
@@ -13,7 +13,7 @@ from pyfiglet import Figlet
 from classes.patient import Patient
 from classes.progressbar import ProgressBar
 
-colorama.init(autoreset=True)
+#colorama.init(autoreset=True)
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
