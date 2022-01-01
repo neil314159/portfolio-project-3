@@ -13,6 +13,7 @@ from prettytable import PrettyTable
 from pyfiglet import Figlet
 from classes.patient import Patient
 from classes.progressbar import ProgressBar
+from classes.tableview import TableView
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -45,6 +46,9 @@ class Clinic:
     def welcome(self, text):
         result = Figlet()
         return result.renderText(text)
+    
+    def clear_display(self):
+        os.system('clear')
 
     def __init__(self):
         self.patient_list = self.load_patients()
@@ -58,34 +62,49 @@ class Clinic:
 
     def main_menu(self):
 
-        print(colored(self.welcome(" Covid Vaccine Manager"), 'green'))
+        print(colored(self.welcome("Covid Vaccine Manager"), 'green'))
         response = pyip.inputMenu(['Guide', 'View At Risk Patients', 'View All Patients',
                                    'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
         if response == "Home":
-            os.system('clear')
-        print(welcome("covid! "))
+            self.clear_display()
+            print(self.welcome("covid! "))
 
-        #calculate_vaxed()
-        mainmenu()
+            #calculate_vaxed()
+            mainmenu()
 
         if response == "Guide":
             show_instructions()
         if response == "View Progress Dashboard":
-            show_dashboard()
+            self.show_dashboard()
         if response == "Add New Patient":
             add_new_patient()
         if response == "View All Patients":
-            os.system('clear')
+            self.clear_display()
 
-            x = PrettyTable()
-            x.field_names = ["City name", "Area", "Population", "Annual Rainfall"]
-            x.add_row(["Adelaide", 1295, 1158259, 600.5])
-            x.add_row(["Brisbane", 5905, 1857594, 1146.4])
-            x.add_row(["Darwin", 112, 120900, 1714.7])
-            x.add_row(["Hobart", 1357, 205556, 619.5])
-            x.add_row(["Sydney", 2058, 4336374, 1214.8])
-            x.add_row(["Melbourne", 1566, 3806092, 646.9])
-            x.add_row(["Perth", 5386, 1554769, 869.4])
+            new_table = TableView(self.patient_list, 0)
+            new_table.print_table()
 
-            print(x)
-            mainmenu()
+    def show_dashboard(self):     
+        os.system('clear')
+        # one, two, three = calculate_vaxed()
+        #print(one)
+    
+        print(colored(self.welcome(" Dashboard"), 'green'))
+
+        print('\n')
+        print(return_progress_bar(20, "90% fully vaccinated"))
+
+        print('\n')
+        print(return_progress_bar(one, "80% first dose"))
+
+        print('\n')
+        print(return_progress_bar(two, "70% second dose"))
+
+        print('\n')
+        print(return_progress_bar(three, "60% have booster"))
+
+        print('\n')
+    
+        input("\n Hit enter key to return to main menu")
+        #pause("Press any key to return to the main menu")
+        self.main_menu()
