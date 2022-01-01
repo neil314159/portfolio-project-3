@@ -13,6 +13,8 @@ from pyfiglet import Figlet
 from classes.patient import Patient
 from classes.progressbar import ProgressBar
 
+#from classes.clinic import Clinic
+
 #colorama.init(autoreset=True)
 
 SCOPE = [
@@ -65,6 +67,7 @@ def show_dashboard():
     #print(one)
     
     print(colored(welcome(" Dashboard"), 'green'))
+
     print('\n')
     print(return_progress_bar(20, "90% fully vaccinated"))
 
@@ -78,6 +81,8 @@ def show_dashboard():
     print(return_progress_bar(three, "60% have booster"))
 
     print('\n')
+    
+    input("Hit enter key to return to main menu")
     mainmenu()
 
 
@@ -101,18 +106,18 @@ def add_new_patient():
 
 
 def load_patients():
+
     patient_list = []
     info = SHEET.worksheet('data')
 
     data = info.get_all_values()
-    #calculate_ages(data)
+    
 
     for a in data:
-        #new_patient = Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6])
-       # print(a[3])
+      
         patient_list.append(Patient(a[0], a[1], a[2], a[3], a[4], a[5], a[6]))
 
-    #n = Patient(1, "neil", "Boland", "1/1/2000", True, True, False)
+    
 
     return patient_list
 
@@ -178,16 +183,7 @@ def mainmenu():
 
 def main():
     patient_list = load_patients()
-    pb = return_progress_bar(20, "test")
-    #print(pb)
-    # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
     os.system('clear')
-    print(colored(welcome("View patients"), 'green'))
-
-    #for a in patient_list:
-    #    print(getattr(a, 'firstname'))
-
-    #print(pb)
     mainmenu()
 
 
