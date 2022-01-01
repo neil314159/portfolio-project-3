@@ -142,12 +142,12 @@ def mainmenu():
     response = pyip.inputMenu(['Guide', 'View At Risk Patients', 'View All Patients', 'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
     if response == "Home":
         os.system('clear')
-        print(welcome("covid! extra long strong what happens"))
+        print(welcome("covid! "))
         
         #calculate_vaxed()
         mainmenu()
     
-    if response == "View Instructions":
+    if response == "Guide":
         show_instructions()
     if response == "View Dashboard":
         show_dashboard()
