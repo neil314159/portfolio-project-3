@@ -1,4 +1,4 @@
-#class to manage entire app
+# class to manage entire app
 
 import gspread
 from google.oauth2.service_account import Credentials
@@ -41,7 +41,7 @@ class Clinic:
         return patient_list2
 
 
-    def welcome(self, text):
+    def header(self, text):
         result = Figlet()
         return result.renderText(text)
     
@@ -56,7 +56,7 @@ class Clinic:
 
     def main_menu(self):
         self.clear_display()
-        print(colored(self.welcome("Patient Vaccine Tracker"), 'green'))
+        print(colored(self.header("Patient Vaccine Tracker"), 'green'))
         response = pyip.inputMenu(['Guide', 'View At Risk Patients', 'View All Patients',
                                    'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
         
@@ -80,7 +80,7 @@ class Clinic:
         one, two, three = self.calculate_vaxed()
         #print(one)
     
-        print(colored(self.welcome(" Dashboard"), 'green'))
+        print(colored(self.header("Dashboard"), 'green'))
 
        
 
@@ -100,8 +100,11 @@ class Clinic:
         self.main_menu()
 
     def add_new_patient(self):
+
         self.clear_display()
-        
+        print(colored(self.header("New Patient"), 'green'))
+
+
         are_you_sure = pyip.inputYesNo("Are you sure you want to add a new user? Type Yes(Y) or No(N): ")
         if are_you_sure == 'no': self.main_menu()
         
@@ -177,8 +180,8 @@ class Clinic:
 
     def show_guide(self):
         self.clear_display()
-        text = colored('Hello, World!', 'red', 'on_cyan')
-        print(text)
+        print(colored(self.header("User Guide"), 'green'))
+        
         print(
             'The Covid Vacination Manager allows you to keep track \n'
             'of the vaccination status of a list of patients \n'
@@ -194,5 +197,5 @@ class Clinic:
             '\n'
 
         )
-        input("Hot enter key to return")
+        input("Hit enter key to return")
         self.main_menu()
