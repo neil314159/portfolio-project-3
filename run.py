@@ -7,6 +7,9 @@ import pyinputplus as pyip
 import os
 from classes.mixins import ManageDisplay
 
+
+
+from pyfiglet import Figlet
 from classes.patient import Patient
 from classes.progressbar import ProgressBar
 
@@ -24,6 +27,12 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('cpm_data')
 
 
+
+
+
+def welcome(text):
+    result = Figlet()
+    return result.renderText(text)
 
 def show_instructions():
     os.system('clear')
@@ -131,18 +140,8 @@ def mainmenu():
     response = pyip.inputMenu(['Home', 'View Patients', 'Add New Patient', 'Update Patient Details', 'View Dashboard', 'View Instructions'], numbered=True)
     if response == "Home":
         os.system('clear')
-        print("""
-       _____             _      _   _______                 _               
-      / ____|            (_)    | | |__   __|               | |              
-    | |      ___ __   __ _   __| |    | | _ __  __ _   ___ | | __ ___  _ __ 
-    | |     / _ \\ \ / /| | / _` |    | || '__|/ _` | / __|| |/ // _ \| '__|
-    | |____| (_) |\ V / | || (_| |    | || |  | (_| || (__ |   <|  __/| |   
-     \_____|\___/  \_/  |_| \__,_|    |_||_|   \__,_| \___||_|\_\\___||_|   
-                                                                            
-                                                                            
-
-                                                            
-        """)
+        print(welcome("covid!"))
+        
         #calculate_vaxed()
         mainmenu()
     
@@ -179,16 +178,7 @@ def main():
     #print(pb)
     # response = pyip.inputMenu(['cat', 'dog', 'moose'], numbered=True)
     os.system('clear')
-    print("""
-       _____             _      _   _______                 _               
-     / ____|            (_)    | | |__   __|               | |              
-    | |      ___ __   __ _   __| |    | | _ __  __ _   ___ | | __ ___  _ __ 
-    | |     / _ \\ \ / /| | / _` |    | || '__|/ _` | / __|| |/ // _ \| '__|
-    | |____| (_) |\ V / | || (_| |    | || |  | (_| || (__ |   <|  __/| |   
-     \_____|\___/  \_/  |_| \__,_|    |_||_|   \__,_| \___||_|\_\\___||_|   
-                                                                            
-                                                                                                                               
-    """)
+    print(welcome("CPT!"))
 
     #for a in patient_list:
     #    print(getattr(a, 'firstname'))
