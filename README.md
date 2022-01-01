@@ -16,7 +16,6 @@ The website can be seen [here](https://vaccination-patient-manager.herokuapp.com
 * [Third Party Libraries](#wireframes)
 * [Features](#Features)
 * [Future Features](#features-to-implement-in-the-future)
-* [Wireframes](#wireframes)
 * [Technologies Used](#Technologies-Used)
 * [Testing](#Testing)
 * [Validation Testing](#validation-testing)

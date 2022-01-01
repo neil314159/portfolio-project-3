@@ -1,7 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
-#import colorama
-#from colorama import Fore, Back, Style
+
 from datetime import datetime
 import pyinputplus as pyip
 import os
@@ -16,7 +15,7 @@ from classes.progressbar import ProgressBar
 
 from classes.clinic import Clinic
 
-#colorama.init(autoreset=True)
+
 
 
 
