@@ -63,7 +63,8 @@ def show_dashboard():
     os.system('clear')
     one, two, three = calculate_vaxed()
     #print(one)
-    print(colored(welcome("Dashboard"), 'green'))
+    
+    print(colored(welcome(" Dashboard"), 'green'))
     print('\n')
     print(return_progress_bar(20, "90% fully vaccinated"))
 
@@ -144,7 +145,7 @@ def calculate_vaxed():
 
 def mainmenu():
     response = pyip.inputMenu(['Guide', 'View At Risk Patients', 'View All Patients',
-                              'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
+        'Enroll New Patient', 'View Progress Dashboard'], numbered=True)
     if response == "Home":
         os.system('clear')
         print(welcome("covid! "))
