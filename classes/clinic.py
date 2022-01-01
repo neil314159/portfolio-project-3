@@ -277,24 +277,7 @@ class Clinic:
                 patient_table.page_number += 1
                 patient_table.print_table()
             if response == "Delete Patient":
-                self.clear_display()
-                print(colored("*** View All Patients ***\n", 'green'))
-                patient_table.print_table()
-                are_you_sure = pyip.inputYesNo(
-                    "Are you sure you want to delete a patient from the system? Type Yes(Y) or No(N): ")
-                if are_you_sure == 'no':
-                    self.main_menu()
-
-                to_delete = pyip.inputInt(
-                    prompt="Enter the number of the patient you want to delete: ",
-                    min=1, lessThan=len(self.patient_list)+1)
-
-                info = SHEET.worksheet('data')
-                info.delete_row(
-                    self.patient_list[int(to_delete)-1].sheet_index)
-                del self.patient_list[int(to_delete)-1]
-                input("Hit the enter key to return to the main menu: ")
-                self.main_menu()
+                self.delete_patient(patient_table)
 
             if response == "Update Vaccination Status":
                 self.update_patient_status(patient_table)
@@ -308,6 +291,7 @@ class Clinic:
         self.main_menu()
 
     def update_patient_status(self, patient_table):
+
         self.clear_display()
         print(colored("*** View All Patients ***\n", 'green'))
         patient_table.print_table()
@@ -351,4 +335,25 @@ class Clinic:
         # del self.patient_list[int(to_delete)-1]
         input("Hit the enter key to return to the main menu: ")
 
+        self.main_menu()
+
+
+    def delete_patient(self, patient_table):
+        self.clear_display()
+        print(colored("*** View All Patients ***\n", 'green'))
+        patient_table.print_table()
+        are_you_sure = pyip.inputYesNo(
+               "Are you sure you want to delete a patient from the system? Type Yes(Y) or No(N): ")
+        if are_you_sure == 'no':
+            self.main_menu()
+
+        to_delete = pyip.inputInt(
+        prompt="Enter the number of the patient you want to delete: ",
+                min=1, lessThan=len(self.patient_list)+1)
+
+        info = SHEET.worksheet('data')
+        info.delete_row(
+                 self.patient_list[int(to_delete)-1].sheet_index)
+        del self.patient_list[int(to_delete)-1]
+        input("Hit the enter key to return to the main menu: ")
         self.main_menu()
