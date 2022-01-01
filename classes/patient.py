@@ -28,3 +28,7 @@ class Patient:
         #print(bday)
 
         return bday
+    
+    def get_id(self):
+        
+        return int(self.id)
