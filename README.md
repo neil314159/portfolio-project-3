@@ -9,11 +9,9 @@ It is presented as a text-based interface in a terminal hosted on Heroku. Users 
 This project is designed to fulfil the requirements of the Code Institute Portfolio 3 Submission.
 
 The live website can be found [here](https://vaccination-patient-manager.herokuapp.com/).
-
 <br>
 ![dashboardtitle](https://github.com/neil314159/portfolio-project-3/blob/main/docs/dashboardtitle.png)
-
-
+<br>
 ## Table of Contents
 * [Overview](#wireframes)
 * [How to Use](#wireframes)
@@ -49,10 +47,18 @@ I created this chart to map out the flow of control through the program and help
 
 # Features
 
+## **Welcome Screen:**
+From the welcome screen, the user has access to three things: -
+* Game rules/How to play.
+* Back Story.
+* Start the game.  
+  
+![Welcome screen screenshot](docs/mainmenu.png)
+
 ## User Input and Validation
 
 In a text-based software project, it is a bigger concern that input coming from the user through the keyboard is handled correctly. For this program, I used an external library called PyInputPlus. This has a number of advantages:
-* Prompts can be shown to the user which only accept a certain range of inputs. For example, to record the month part of a date of birth, then only an integer between 1 and 12 should be accepted. This makes it easier to work with data inside the program when we know it is within certain paramaters.
+* Prompts can be shown to the user which only accept a certain range of inputs. For example, to record the month part of a date of birth, then only an integer between 1 and 12 should be accepted. This makes it easier to work with data inside the program when we know it is within certain parameters.
 * The same library can display a menu of numbered options and keep looping until a valid selection is made. This helps to make the code less verbose instead of handling every menu and validation manually.
 
 
@@ -64,7 +70,7 @@ This project was designed using Object Oriented Principles in mind. Here is an o
 ### Patient class
 * This represents the individual patient kept track of by the clinic. This class has a unique 6 digit ID, and attributes showing personal details and vaccination records. It has a method which calculates their age based on today's date and returns it to the Clinic class for sorting.
 ### Table View class
-* The main functionality of this program is in presenting pages of patient records to the user. Rather than printing long lists whcih require scrolling, I wanted to allow the user to page forward and back through a table. This class takes in data and prints out a slice of it in table form based on which page number is currently selected. This allows the program menu to show data and options that properly persist over time rather than being reset.
+* The main functionality of this program is in presenting pages of patient records to the user. Rather than printing long lists which require scrolling, I wanted to allow the user to page forward and back through a table. This class takes in data and prints out a slice of it in table form based on which page number is currently selected. This allows the program menu to show data and options that properly persist over time rather than being reset.
 
 
 ## Possible Future Features
