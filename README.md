@@ -10,7 +10,7 @@ This project is designed to fulfil the requirements of the Code Institute Portfo
 
 The live website can be found [here](https://vaccination-patient-manager.herokuapp.com/).
 <br>
-![dashboardtitle](https://github.com/neil314159/portfolio-project-3/blob/main/docs/dashboardtitle.png)
+![intro](/docs/new.gif)
 <br>
 ## Table of Contents
 * [Overview](#wireframes)
