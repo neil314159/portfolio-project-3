@@ -41,8 +41,8 @@ class Clinic:
         """ Gets all values from Google Sheets and
         stores them in a list.
         """
+        patient_list = []
         try:
-            patient_list = []
             info = SHEET.worksheet('data')
             data = info.get_all_values()
         except:
@@ -62,10 +62,12 @@ class Clinic:
         self.clear_display()
         print(colored(self.header("Vaccination Manager"), 'green'))
         # 3rd Party library used for input validation on menu
+        menu_prompt = "Type the number of a menu option and hit return:\n"
         response = pyip.inputMenu(['Guide', 'View At Risk Patients',
                                    'View All Patients',
                                    'Enroll New Patient',
-                                   'View Progress Dashboard'], numbered=True)
+                                   'View Progress Dashboard'],
+                                  prompt=menu_prompt, numbered=True)
 
         if response == "Guide":
             self.show_guide()
@@ -83,25 +85,24 @@ class Clinic:
         """
         self.clear_display()
         print(colored(self.header("User Guide"), 'green'))
-        
         print(
             "This system is designed to keep track of the \n"
             'vaccination status of a list of patients in a clinic. \n'
             '\n'
             'The following menu options are available to the user: \n'
-            '\n'
-            + colored('View At Risk Patients', 'cyan') +
+            '\n' +
+            colored('View At Risk Patients', 'cyan') +
             ' - Here you can view a list of patients \n'
-            'sorted by urgency, first ranked by how many vaccine shots \n'
-            'they require, and then by age. \n'
-            + colored('View All Patients', 'cyan') +
+            'sorted by urgency, first ranked by how many vaccine shots \n' +
+            'they require, and then by age. \n' +
+            colored('View All Patients', 'cyan') +
             ' - This shows a list of all patients sorted alphabetically \n'
-            'and shows further menu options to let you update patient details \n'
-             'or remove them from the system. \n'
-            + colored('Enroll New Patient', 'cyan') +
+            'and shows further menu options to let you update patient \n'
+            'details or remove them from the system. \n' +
+            colored('Enroll New Patient', 'cyan') +
             ' - A set of guided questions will take the details of a new \n'
-             'patient and enter them into the database. \n'
-            + colored('Progress Dashboard', 'cyan') +
+            'patient and enter them into the database. \n' +
+            colored('Progress Dashboard', 'cyan') +
             ' - Here you can see a bar chart showing what  \n'
             'percentage of patients have received each shot. This \n'
             'provides a high-level view of hwo much progress \n'
@@ -139,7 +140,8 @@ class Clinic:
             else:
                 menu = ['Next Page', 'Previous Page', 'Main Menu']
 
-            response = pyip.inputMenu(menu, numbered=True)
+            menu_prompt = "Type the number of a menu option and hit return:\n"
+            response = pyip.inputMenu(menu, prompt=menu_prompt, numbered=True)
 
             if response == "Main Menu":
                 viewing_page = False
@@ -184,7 +186,8 @@ class Clinic:
                         'Update Vaccination Status',
                         'Delete Patient', 'Main Menu']
             # Different menu shown depending on first/last page
-            response = pyip.inputMenu(menu, numbered=True)
+            menu_prompt = "Type the number of a menu option and hit return:\n"
+            response = pyip.inputMenu(menu, prompt=menu_prompt, numbered=True)
 
             if response == "Main Menu":
                 viewing_page = False
