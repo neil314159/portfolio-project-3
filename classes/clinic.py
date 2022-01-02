@@ -102,9 +102,9 @@ class Clinic:
             ' - A set of guided questions will take the details of a new \n'
             'patient and enter them into the database. \n' +
             colored('Progress Dashboard', 'cyan') +
-            ' - Here you can see a bar chart showing what  \n'
-            'percentage of patients have received each shot. This provides \n'
-            'a high-level view of hwo much progress has been made. \n'
+            ' - Here you can see a bar chart showing what fraction \n'
+            'of patients have received each shot. This provides an overall \n'
+            'view of hwo much progress has been made in reaching patients. \n'
         )
         prompt = colored("Hit the enter key to "
                          "return to the main menu: ", 'yellow')
