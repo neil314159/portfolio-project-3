@@ -130,6 +130,7 @@ This project was designed using Object Oriented Principles in mind. Here is an o
 ### Email Contact
 * If a field for email addresses was added to the patient data, then it would be possible to email users to arrange appointments or discussion. These emails could be programatically sent out through the Heroku server or via Zapier automation integrations. There are possible concerns about email deliverability when sending from your own server or free hosting.
 
+
 ## Third Party Libraries
 
 After looking at a number of projects of this type, there are a few factors that seem to contribute to extra code and clutter. The first is storing large strings of ASCII graphics to be printed out in the terminal. The second is validating user input for any interaction through the terminal. For this reason I have used the following libraries as part of my project.
@@ -160,8 +161,52 @@ Other libraries used include:
 * [PEP8](http://pep8online.com/)
     * Python code validation service.
 
+# Testing
+
+## Manual Testing Strategy
+
+### Menu Iteration
+
+As this is a text-menu based system, the first part of my testing strategy was to exhaustively naviagate through every menu choice multiple times in different sequences. I did this during development and when the project was finished.
+
+**Issues Found**
+* In the earlier stages of development I had an incorrect logic flow for the menu which adds a new user, sometimes causing it to be triggered at the wrong time. After confirming the issue happened repeatedly,  it was fixed by changing the if else logic that displayed the menu screens.
+
+### Input Testing
+
+The next step was to attempt to cause the program to crash by entering incorrect input to every menu option. For example, entering strings when ints were asked for, typing random keys into the menu prompt etc. I also created and deleted new users in the program multiple times, and edited their details to make sure all changes were stored properly.
+
+**Issues Found**
+* After installling a library for handling input validation, I didn't have any other unexpected errors. There are however some cases where it is difficult to set rules on what constitutes allowable input. For example, for a first or last name, I accept any string of non-zero length. This is because there are so many edge cases with different names in other languages and cultures that it is difficult to set rules about input.
+* There were a number of off-by-one errors in accessing the spreadsheet creating new users, as the list is zero-index and Google Sheets starts the index at 1. Once accounted for this was easily fixed.
+
+### Data Verification
+
+One advantage of using Google Sheets API for storage is that is possible to have the spreadsheet open and see in real time if your program is correctly adding or removing data.
+
+This allows for a very quick feedback loop when developing and makes it easier to spot errors quickly.
+
+**Issues Found**
+* Google Sheets stores Boolean True values as "TRUE". where Python expects "True" when translated to a string. This caused some problems with data for new users being stored and read back incorrectly.
+* The initial logic used to store the vaccination history of each patient was incorrect, resulting in negative values no matter what the user answered to the prompt. Watching the data being stored in Google Sheets as I created each user helped me see the problem quickly and alter the function for creating new users.
+
+![spreadsheet](docs/spreadsheet.png)
+
+
+## Bugs Found and Fixed
+
+
 ## Validation Testing
-* Python: All code was tested using the [PEP8 Validator](http://pep8online.com/). The code shows no errors and no warnings. Most of the initial warnings that required fixing were about keeping all code within the 80 character limit.
+
+### Automatic Validation
+* The Python tools built into GitPod perform automatic checks on the code as you work on it. Initially the biggest challenge was developing the habit of fitting every line into 80 characters. During the course of developing the project I installed many different external libraries and the automatic validator pointed out which ones were never called or used, and could be safely removed. It also gave real time feedback on cases where I incorrectly indented a nested loop and could fix it more easily.
+
+### Manual Validation
+* To perform manual validation testing, all code was copied and pasted into the [PEP8 Validator](http://pep8online.com/). Initially there were extra errors showing above what the automatic linter in GitPod had noticed. Most of these were around indentation alignment when splitting function arguments over multiple lines. There were also some issues with trailing whitespaces. These have been resolved and the code shows no errors and no warnings. 
+
+![pep8](docs/pep8.png)
+
+
 
 ### Development Issues
 * When I initially designed the interface of the program, I had planned to use emoji symbols such as ✅ when presenting information to the user. However, while this worked well on the GitPod development environment, it caused problems when deployed to Heroku. It seems the terminal printed these characters with a slightly different width which caused all of the tables to be slightly misaligned. I tested a number of libraries for printing and formatting rich text but could not fix this problem before the deadline and reverted to using coloured text.
