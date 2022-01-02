@@ -13,16 +13,13 @@ The live website can be found [here](https://vaccination-patient-manager.herokua
 ![intro](/docs/new.gif)
 <br>
 ## Table of Contents
-* [Overview](#wireframes)
-* [How to Use](#wireframes)
-* [Planning](#wireframes)
-* [Data Model](#wireframes)
-* [OOP Principles and Data Model](#)
-* [Flow of Control](#wireframes)
-* [Testing](#wireframes)
-* [Third Party Libraries](#wireframes)
+
+* [Planning](#planning)
 * [Features](#Features)
+* [User Input and Validation](#user-input-and-validation)
+* [OOP and Data Model](#oop-and-data-model)
 * [Future Features](#possible-future-features)
+* [Third Party Libraries](#third-party-libraries)
 * [Technologies Used](#Technologies-Used)
 * [Testing](#Testing)
 * [Validation Testing](#validation-testing)
@@ -30,7 +27,7 @@ The live website can be found [here](https://vaccination-patient-manager.herokua
 * [Credits](#credits)
 * [Acknowledgements](#acknowledgements)
 
-## Initial Planning
+## Planning
 
 ### Goals
 * To present a simple, easy-to-grasp text interface with a clear logical flow
@@ -133,7 +130,7 @@ This project was designed using Object Oriented Principles in mind. Here is an o
 ### Email Contact
 * If a field for email addresses was added to the patient data, then it would be possible to email users to arrange appointments or discussion. These emails could be programatically sent out through the Heroku server or via Zapier automation integrations. There are possible concerns about email deliverability when sending from your own server or free hosting.
 
-## Third Party Libraries Used
+## Third Party Libraries
 
 After looking at a number of projects of this type, there are a few factors that seem to contribute to extra code and clutter. The first is storing large strings of ASCII graphics to be printed out in the terminal. The second is validating user input for any interaction through the terminal. For this reason I have used the following libraries as part of my project.
 
