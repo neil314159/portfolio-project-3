@@ -1,5 +1,3 @@
-# class to manage entire app
-
 import gspread
 from google.oauth2.service_account import Credentials
 import plotext as plt
@@ -9,10 +7,11 @@ import os
 from termcolor import colored
 from random import randint
 from pyfiglet import Figlet
+
 from classes.patient import Patient
 from classes.tableview import TableView
 
-
+# Used Code Institute tutorial code to connect to Google Sheets API
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/drive.file",
@@ -26,13 +25,19 @@ SHEET = GSPREAD_CLIENT.open('cpm_data')
 
 
 class Clinic:
-
+    """ Main class which handles all menus and data
+    operations. Uses a list of Patients and can update
+    data back to Google Sheets.
+    """
     def load_patients(self):
-
+        """ Gets all values from Google Sheets and
+        stores them in a list.
+        """
         patient_list = []
         info = SHEET.worksheet('data')
         data = info.get_all_values()
 
+        # Gives an index that reflects the position in spreadsheet
         for index, a in enumerate(data):
             patient_list.append(
                 Patient(a[0], index+1, a[1], a[2], a[3], a[4], a[5], a[6]))
@@ -40,16 +45,23 @@ class Clinic:
         return patient_list
 
     def header(self, text):
+        """ Converts text into a large ASCII code
+        representation.
+        """
         result = Figlet()
         return result.renderText(text)
 
     def clear_display(self):
+        """ Clears screen after menu operations.
+        """
         os.system('clear')
 
     def __init__(self):
+        """ List of patients are loaded in
+        when the object is constructed.
+        """
         self.patient_list = self.load_patients()
         self.clear_display()
-
         self.main_menu()
 
     def main_menu(self):
@@ -67,7 +79,7 @@ class Clinic:
             self.view_at_risk_patients()
         if response == "View All Patients":
             self.clear_display()
-            self.view_all_patients()()
+            self.view_all_patients()
         if response == "View Progress Dashboard":
             self.show_dashboard()
         if response == "Enroll New Patient":
@@ -124,11 +136,13 @@ class Clinic:
         if first_dose_prompt == "yes":
             first_dose = True
             second_dose_prompt = pyip.inputYesNo(
-                "Has the patient had their second dose? Type Yes(Y) or No(N): ")
+                "Has the patient had their second dose? "
+                "Type Yes(Y) or No(N): ")
             if second_dose_prompt == "yes":
                 second_dose = True
                 booster_prompt = pyip.inputYesNo(
-                    "Has the patient had their booster? Type Yes(Y) or No(N): ")
+                    "Has the patient had their booster?"
+                    " Type Yes (Y) or No (N): ")
                 if booster_prompt == "yes":
                     booster = True
 
@@ -149,9 +163,13 @@ class Clinic:
         self.main_menu()
 
     def generate_new_id(self):
+        """ Generates a new 6-digit Patient ID number.
+        Checks for uniqueness against existing ID numbers.
+        """
         new_id = randint(100000, 999999)
         new_id_found = False
         while new_id_found is False:
+            # Compiles a list of all matching IDs and checks it's length
             if(len([x for x in self.patient_list if (int(x.get_id()) == new_id)]) > 0):
                 new_id = randint(100000, 999999)
             else:
@@ -177,6 +195,8 @@ class Clinic:
         return(totalfirstdose, totalseconddose, totalbooster)
 
     def show_guide(self):
+        """ Presents list of instructions to user
+        """
         self.clear_display()
         print(colored(self.header("User Guide"), 'green'))
 
@@ -296,27 +316,30 @@ class Clinic:
         print(colored("*** View All Patients ***\n", 'green'))
         patient_table.print_table()
         are_you_sure = pyip.inputYesNo(
-                    "Are you sure you want to update a patient's status? Type Yes(Y) or No(N): ")
+                    "Are you sure you want to update a patient's status?"
+                    " Type Yes(Y) or No(N): ")
         if are_you_sure == 'no':
             self.main_menu()
 
         to_update = pyip.inputInt(
-        prompt="Enter the number of the patient you want to update: ",
-        min=1, lessThan=len(self.patient_list)+1)
+                                  prompt="Enter the number of the "
+                                  "patient you want to update: ",
+                                  min=1, lessThan=len(self.patient_list)+1)
 
-                
         first_dose = second_dose = booster = False
+        # Nested if's since each dose depends on previous one
         first_dose_prompt = pyip.inputYesNo(
             "Has the patient had their first dose? Type Yes(Y) or No(N): ")
-
         if first_dose_prompt == "yes":
             first_dose = True
             second_dose_prompt = pyip.inputYesNo(
-                "Has the patient had their second dose? Type Yes(Y) or No(N): ")
+                "Has the patient had their second dose? "
+                "Type Yes(Y) or No(N): ")
             if second_dose_prompt == "yes":
                 second_dose = True
                 booster_prompt = pyip.inputYesNo(
-                    "Has the patient had their booster? Type Yes(Y) or No(N): ")
+                    "Has the patient had their booster? "
+                    "Type Yes(Y) or No(N): ")
                 if booster_prompt == "yes":
                     booster = True
 
@@ -324,26 +347,25 @@ class Clinic:
         self.patient_list[to_update-1].second_dose = str(second_dose).upper()
         self.patient_list[to_update-1].booster_dose = str(booster).upper()
 
-        
-
         info = SHEET.worksheet('data')
-        info.update_cell(self.patient_list[int(to_update)-1].sheet_index, 5, str(first_dose).upper())
-        info.update_cell(self.patient_list[int(to_update)-1].sheet_index, 6, str(second_dose).upper())
-        info.update_cell(self.patient_list[int(to_update)-1].sheet_index, 7, str(booster).upper())
+        info.update_cell(self.patient_list[int(to_update)-1].sheet_index,
+                         5, str(first_dose).upper())
+        info.update_cell(self.patient_list[int(to_update)-1].sheet_index,
+                         6, str(second_dose).upper())
+        info.update_cell(self.patient_list[int(to_update)-1].sheet_index,
+                         7, str(booster).upper())
 
-        #         self.patient_list[int(to_delete)-1].sheet_index)
-        # del self.patient_list[int(to_delete)-1]
         input("Hit the enter key to return to the main menu: ")
 
         self.main_menu()
-
 
     def delete_patient(self, patient_table):
         self.clear_display()
         print(colored("*** View All Patients ***\n", 'green'))
         patient_table.print_table()
         are_you_sure = pyip.inputYesNo(
-               "Are you sure you want to delete a patient from the system? Type Yes(Y) or No(N): ")
+               "Are you sure you want to delete a patient from"
+               " the system? Type Yes (Y) or No (N): ")
         if are_you_sure == 'no':
             self.main_menu()
 
@@ -353,7 +375,7 @@ class Clinic:
 
         info = SHEET.worksheet('data')
         info.delete_row(
-                 self.patient_list[int(to_delete)-1].sheet_index)
+                        self.patient_list[int(to_delete)-1].sheet_index)
         del self.patient_list[int(to_delete)-1]
         input("Hit the enter key to return to the main menu: ")
         self.main_menu()
