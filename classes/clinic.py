@@ -46,7 +46,7 @@ class Clinic:
 
     def header(self, text):
         """ Converts text into a large ASCII code
-        representation.
+        representation for page headers.
         """
         result = Figlet()
         return result.renderText(text)
@@ -65,8 +65,13 @@ class Clinic:
         self.main_menu()
 
     def main_menu(self):
+        """ Presents main menu to user, this
+        function is called when other operations
+        are finished.
+        """
         self.clear_display()
         print(colored(self.header("Vaccine Clinic Tracker"), 'green'))
+        # 3rd Party library used for input validation on menu
         response = pyip.inputMenu(['Guide', 'View At Risk Patients',
                                    'View All Patients',
                                    'Enroll New Patient',
@@ -75,10 +80,8 @@ class Clinic:
         if response == "Guide":
             self.show_guide()
         if response == "View At Risk Patients":
-            self.clear_display()
             self.view_at_risk_patients()
         if response == "View All Patients":
-            self.clear_display()
             self.view_all_patients()
         if response == "View Progress Dashboard":
             self.show_dashboard()
@@ -107,15 +110,18 @@ class Clinic:
         self.main_menu()
 
     def add_new_patient(self):
-
+        """ Gets input from user and creates
+        a new Patient in the system.
+        """
         self.clear_display()
         print(colored(self.header("New Patient"), 'green'))
-
+        # Validated user input
         are_you_sure = pyip.inputYesNo(
             "Are you sure you want to add a new user? Type Yes(Y) or No(N): ")
         if are_you_sure == 'no':
             self.main_menu()
 
+        # Create unique new ID
         new_id = self.generate_new_id()
 
         firstname = pyip.inputStr('Enter First name\n')
@@ -146,20 +152,22 @@ class Clinic:
                 if booster_prompt == "yes":
                     booster = True
 
+        # Add new Patient object to user list
         new_patient = Patient(new_id, len(self.patient_list)+1,
                               firstname, lastname,
                               date_of_birth, str(first_dose).upper(),
                               str(second_dose).upper(), str(booster).upper())
         self.patient_list.append(new_patient)
 
+        # Construct data and add to Google Sheet
         newdata = [new_id, firstname, lastname,
                    date_of_birth, first_dose, second_dose, booster]
 
         info = SHEET.worksheet('data')
         info.append_row(newdata)
 
-        # need success condition, message
-        input("Added! Hit the enter key to return to the main menu: ")
+        input("New patient added! Hit the enter "
+              "key to return to the main menu: ")
         self.main_menu()
 
     def generate_new_id(self):
@@ -170,17 +178,20 @@ class Clinic:
         new_id_found = False
         while new_id_found is False:
             # Compiles a list of all matching IDs and checks it's length
-            if(len([x for x in self.patient_list if (int(x.get_id()) == new_id)]) > 0):
+            if(len([x for x in self.patient_list if (
+               int(x.get_id()) == new_id)]) > 0):
                 new_id = randint(100000, 999999)
             else:
                 new_id_found = True
 
         return new_id
 
-    def delete_user(self):
-        print("test")
-
     def calculate_vaxed(self):
+        """ Calculates total vaccination levels
+        for all patients in database. This data is
+        used in the bar chart on the dashboard page.
+        It sums the Booleans over all users.
+        """
 
         firstdose = sum(1 for p in self.patient_list if p.first_dose == "TRUE")
         totalfirstdose = (firstdose/len(self.patient_list))*100
@@ -219,8 +230,12 @@ class Clinic:
         self.main_menu()
 
     def view_at_risk_patients(self):
+        """ Presents a view of all patients sorted by those
+        most at risk. They are ordered first by number of vaccinations
+        received and then by age. No vaccines are highlighted in coloured
+        text for emphasis.
+        """
         self.clear_display()
-        # print(colored(self.header("*** At Risk Patients*** \n"), 'green'))
         print(colored("*** At Risk Patients ***\n", 'green'))
 
         # sort table here
@@ -244,7 +259,6 @@ class Clinic:
             response = pyip.inputMenu(menu, numbered=True)
 
             if response == "Main Menu":
-                print("here")
                 viewing_page = False
             if response == "Next Page":
                 self.clear_display()
@@ -260,10 +274,11 @@ class Clinic:
         self.main_menu()
 
     def view_all_patients(self):
+        """ Shows all patients sorted alphabetically,
+        allows for users to be updated and deleted.
+        Multiple pages of results can be clicked through.
+        """
         self.clear_display()
-
-        # self.patient_list = self.load_patients()
-        # print(colored(self.header("*** At Risk Patients*** \n"), 'green'))
         print(colored("*** View All Patients ***\n", 'green'))
 
         # sort table here
@@ -285,11 +300,10 @@ class Clinic:
                 menu = ['Next Page', 'Previous Page',
                         'Update Vaccination Status',
                         'Delete Patient', 'Main Menu']
-
+            # Different menu shown depending on first/last page
             response = pyip.inputMenu(menu, numbered=True)
 
             if response == "Main Menu":
-                print("here")
                 viewing_page = False
             if response == "Next Page":
                 self.clear_display()
@@ -298,10 +312,8 @@ class Clinic:
                 patient_table.print_table()
             if response == "Delete Patient":
                 self.delete_patient(patient_table)
-
             if response == "Update Vaccination Status":
                 self.update_patient_status(patient_table)
-
             if response == "Previous Page":
                 self.clear_display()
                 print(colored("*** View All Patients ***\n", 'green'))
@@ -311,7 +323,10 @@ class Clinic:
         self.main_menu()
 
     def update_patient_status(self, patient_table):
-
+        """ If a Patient has been vaccinated
+        this allows their status to be updated
+        in the database.
+        """
         self.clear_display()
         print(colored("*** View All Patients ***\n", 'green'))
         patient_table.print_table()
@@ -321,6 +336,7 @@ class Clinic:
         if are_you_sure == 'no':
             self.main_menu()
 
+        # Get reference from screen of user to update
         to_update = pyip.inputInt(
                                   prompt="Enter the number of the "
                                   "patient you want to update: ",
@@ -343,24 +359,30 @@ class Clinic:
                 if booster_prompt == "yes":
                     booster = True
 
+        # Updated with string of boolean to be compatible with Google Sheets
         self.patient_list[to_update-1].first_dose = str(first_dose).upper()
         self.patient_list[to_update-1].second_dose = str(second_dose).upper()
         self.patient_list[to_update-1].booster_dose = str(booster).upper()
 
-        info = SHEET.worksheet('data')
-        info.update_cell(self.patient_list[int(to_update)-1].sheet_index,
+        data = SHEET.worksheet('data')
+        data.update_cell(self.patient_list[int(to_update)-1].sheet_index,
                          5, str(first_dose).upper())
-        info.update_cell(self.patient_list[int(to_update)-1].sheet_index,
+        data.update_cell(self.patient_list[int(to_update)-1].sheet_index,
                          6, str(second_dose).upper())
-        info.update_cell(self.patient_list[int(to_update)-1].sheet_index,
+        data.update_cell(self.patient_list[int(to_update)-1].sheet_index,
                          7, str(booster).upper())
 
-        input("Hit the enter key to return to the main menu: ")
-
+        input("Update was successful! Hit the "
+              "enter key to return to the main menu: ")
         self.main_menu()
 
     def delete_patient(self, patient_table):
+        """ Removes patient from list
+        of users and also deletes their
+        record from Google Sheets.
+        """
         self.clear_display()
+        # Menu reprinted so user can see the ID they want to delete
         print(colored("*** View All Patients ***\n", 'green'))
         patient_table.print_table()
         are_you_sure = pyip.inputYesNo(
@@ -368,11 +390,12 @@ class Clinic:
                " the system? Type Yes (Y) or No (N): ")
         if are_you_sure == 'no':
             self.main_menu()
-
+        # Takes on screen reference and links to the Patient object
         to_delete = pyip.inputInt(
-        prompt="Enter the number of the patient you want to delete: ",
-                min=1, lessThan=len(self.patient_list)+1)
+            prompt="Enter the number of the patient you want to delete: ",
+            min=1, lessThan=len(self.patient_list)+1)
 
+        # Row is deleted from Google Sheets
         info = SHEET.worksheet('data')
         info.delete_row(
                         self.patient_list[int(to_delete)-1].sheet_index)
