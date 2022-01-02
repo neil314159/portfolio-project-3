@@ -56,7 +56,7 @@ class Clinic:
 
     def main_menu(self):
         """ Presents main menu to user, this
-        function is called when other operations
+        function is also called when other operations
         are finished.
         """
         self.clear_display()
@@ -97,9 +97,10 @@ class Clinic:
             '\n of those most at risk'
             '\n'
             '\n'
-
         )
-        input("Hit the enter key to return to the main menu: ")
+        prompt = colored("\n Hit the enter key to "
+                         "return to the main menu: ", 'yellow')
+        input(prompt)
         self.main_menu()
 
     def view_at_risk_patients(self):
@@ -211,20 +212,23 @@ class Clinic:
         # Create unique new ID
         new_id = self.generate_new_id()
 
-        firstname = pyip.inputStr('Enter First name\n')
-        lastname = pyip.inputStr('Enter Last name\n')
+        firstname = pyip.inputStr('Enter their first name:\n')
+        lastname = pyip.inputStr('Enter their last name: \n')
 
         day = pyip.inputInt(
-            prompt="Enter day of birth... ", min=0, lessThan=31)
+            prompt="Enter day of birth in numbers (5 for 5th): ",
+            min=0, lessThan=31)
         month = pyip.inputInt(
-            prompt="Enter month of birth ", min=0, lessThan=13)
-        year = pyip.inputInt(prompt="Enter year of birth ",
+            prompt="Enter month of birth in numbers (1 for January): ",
+            min=0, lessThan=13)
+        year = pyip.inputInt(prompt="Enter year of birth: ",
                              min=0, lessThan=datetime.now().year)
         date_of_birth = str(day)+"/" + str(month)+"/" + str(year)
 
         first_dose = second_dose = booster = False
         first_dose_prompt = pyip.inputYesNo(
-            "Has the patient had their first dose? Type Yes(Y) or No(N): ")
+            "Has the patient had their first vaccine "
+            "dose? Type Yes(Y) or No(N): ")
 
         if first_dose_prompt == "yes":
             first_dose = True
@@ -234,7 +238,7 @@ class Clinic:
             if second_dose_prompt == "yes":
                 second_dose = True
                 booster_prompt = pyip.inputYesNo(
-                    "Has the patient had their booster?"
+                    "Has the patient had their booster shot?"
                     " Type Yes (Y) or No (N): ")
                 if booster_prompt == "yes":
                     booster = True
@@ -252,8 +256,9 @@ class Clinic:
                        date_of_birth, first_dose, second_dose, booster]
             info = SHEET.worksheet('data')
             info.append_row(newdata)
-            input("New patient added! Hit the enter "
-                  "key to return to the main menu: ")
+            success = colored("New patient added! Hit the enter "
+                              "key to return to the main menu: ", 'yellow')
+            input(success)
         except:
             input("Something went wrong! Hit the enter "
                   "key to return to the main menu: ")
@@ -298,7 +303,7 @@ class Clinic:
                     booster = True
 
         try:
-            # Use string of boolean to be compatible with Google Sheets
+            # Use string conversion of bool to be compatible with Google Sheets
             self.patient_list[update-1].first_dose = str(first_dose).upper()
             self.patient_list[update-1].second_dose = str(second_dose).upper()
             self.patient_list[update-1].booster_dose = str(booster).upper()
@@ -311,8 +316,9 @@ class Clinic:
             data.update_cell(self.patient_list[int(update)-1].sheet_index,
                              7, str(booster).upper())
 
-            input("The update was successful! Hit the "
-                  "enter key to return to the main menu: ")
+            success = colored("The update was successful! Hit the enter"
+                              " key to return to the main menu: ", 'yellow')
+            input(success)
         except:
             input("There was a problem updating the user. Hit the "
                   "enter key to return to the main menu: ")
@@ -343,8 +349,10 @@ class Clinic:
                             self.patient_list[int(to_delete)-1].sheet_index)
             # Object deleted from user list
             del self.patient_list[int(to_delete)-1]
-            input("Deletion was successful! Hit "
-                  "the enter key to return to the main menu: ")
+            success = colored("Deletion was successful! Hit "
+                              "the enter key to return to "
+                              "the main menu: ", 'yellow')
+            input(success)
         except:
             input("Something went wrong! Hit the "
                   "enter key to return to the main menu: ")
@@ -356,7 +364,7 @@ class Clinic:
         Uses a 3rd party library to output chart.
         """
         self.clear_display()
-        print(colored(self.header("Dashboard"), 'green'))
+        print(colored(self.header("Progress"), 'green'))
         # Get total numbers calculated
         first_dose, second_dose, booster = self.calculate_vaxed()
         # Create chart
@@ -371,7 +379,14 @@ class Clinic:
         plt.plotsize(60, 7)
         plt.show()
 
-        input("\n Hit the enter key to return to main menu: ")
+        print("\n This chart shows the overall progress made in"
+              "\n vaccinating the entire list of patients in this clinic."
+              "\n The bars represent the percentage of total first, second "
+              "\n booster shots administered. ")
+
+        prompt = colored("\n Hit the enter key to "
+                         "return to the main menu: ", 'yellow')
+        input(prompt)
         self.main_menu()
 
     def generate_new_id(self):
@@ -396,7 +411,6 @@ class Clinic:
         used in the bar chart on the dashboard page.
         It sums the Booleans over all users.
         """
-
         firstdose = sum(1 for p in self.patient_list if p.first_dose == "TRUE")
         totalfirstdose = (firstdose/len(self.patient_list))*100
 
