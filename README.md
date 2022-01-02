@@ -1,4 +1,7 @@
-# Patient Vaccination Manager
+# **Patient Vaccination Manager**
+
+## **Overview**
+
 
 Description here
 
@@ -27,13 +30,15 @@ The live website can be found [here](https://vaccination-patient-manager.herokua
 # Features
 
 ## OOP and Data Model
- This project was designed using Object Oriented Principes in mind. Here is an overview of the classes used to create the site:
+
+This project was designed using Object Oriented Principles in mind. Here is an overview of the classes used to create the site:
 ### Clinic class
 * This is the overall management class for the app, it takes in the data on loading, and also presents menu options to the user. It has helper functions to display data, clear the screen, create and edit patient records. It also sorts and filters the data in order to present it to the user.
 ### Patient class
 * This represents the individual patient kept track of by the clinic. This class has a unique 6 digit ID, and attributes showing personal details and vaccination records. It has a method which calculates their age based on today's date and returns it to the Clinic class for sorting.
 ### Table View class
 * The main functionality of this program is in presenting pages of patient records to the user. Rather than printing long lists whcih require scrolling, I wanted to allow the user to page forward and back through a table. This class takes in data and prints out a slice of it in table form based on which page number is currently selected. This allows the program menu to show data and options that properly persist over time rather than being reset.
+
 
 ## Possible Future Features
 
@@ -75,6 +80,8 @@ Other libraries used include:
 ## Validation Testing
 * Python: All code was tested using the [PEP8 Validator](http://pep8online.com/). The code shows no errors and no warnings. Most of the initial warnings that required fixing were about keeping all code within the 80 character limit.
 
+### Development Issues
+* When I initially designed the interface of the program, I had planned to use emoji symbols such as ✅ when presenting information to the user. However, while this worked well on the GitPod development environment, it caused problems when deployed to Heroku. It seems the terminal printed these characters with a slightly different width which caused all of the tables to be slightly misaligned. I tested a number of libraries for printing and formatting rich text but could not fix this problem before the deadline and reverted to using coloured text.
 
 # Deployment
 
