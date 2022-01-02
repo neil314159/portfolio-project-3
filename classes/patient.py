@@ -3,7 +3,7 @@ from datetime import datetime
 
 class Patient:
     """ Represents patients in the system.
-   Main Clinic class stores users a list of
+   Main Clinic class stores users in a list of
    Patients.
     """
 

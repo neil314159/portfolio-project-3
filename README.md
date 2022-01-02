@@ -167,7 +167,7 @@ Other libraries used include:
 
 ### Menu Iteration
 
-As this is a text-menu based system, the first part of my testing strategy was to exhaustively naviagate through every menu choice multiple times in different sequences. I did this during development and when the project was finished.
+As this is a text-menu based system, the first part of my testing strategy was to exhaustively navigate through every menu choice multiple times in different sequences. I did this during development and when the project was finished.
 
 **Issues Found**
 * In the earlier stages of development I had an incorrect logic flow for the menu which adds a new user, sometimes causing it to be triggered at the wrong time. After confirming the issue happened repeatedly,  it was fixed by changing the if else logic that displayed the menu screens.
@@ -177,8 +177,8 @@ As this is a text-menu based system, the first part of my testing strategy was t
 The next step was to attempt to cause the program to crash by entering incorrect input to every menu option. For example, entering strings when ints were asked for, typing random keys into the menu prompt etc. I also created and deleted new users in the program multiple times, and edited their details to make sure all changes were stored properly.
 
 **Issues Found**
-* After installling a library for handling input validation, I didn't have any other unexpected errors. There are however some cases where it is difficult to set rules on what constitutes allowable input. For example, for a first or last name, I accept any string of non-zero length. This is because there are so many edge cases with different names in other languages and cultures that it is difficult to set rules about input.
-* There were a number of off-by-one errors in accessing the spreadsheet creating new users, as the list is zero-index and Google Sheets starts the index at 1. Once accounted for this was easily fixed.
+* After installing a library for handling input validation, I didn't have any other unexpected errors. There are however some cases where it is difficult to set rules on what constitutes allowable input. For example, for a first or last name, I accept any string of non-zero length. This is because there are so many edge cases with different names in other languages and cultures that it is difficult to set rules about input.
+* There were a number of off-by-one errors in accessing the spreadsheet creating new users, as the Python list is zero-indexed and Google Sheets starts the index at 1. Once accounted for this was easily fixed.
 
 ### Data Verification
 
@@ -193,7 +193,19 @@ This allows for a very quick feedback loop when developing and makes it easier t
 ![spreadsheet](docs/spreadsheet.png)
 
 
-## Bugs Found and Fixed
+## Other Bugs
+
+1. Emoji Printing Problem
+    * Problem: During the initial design of this program, I had intended to I had planned to use emoji symbols such as ✅ when presenting information to the user. However, while this worked well on the GitPod development environment, it caused problems when deployed to Heroku. It seems the terminal printed these characters with a slightly different width which caused all of the tables to be slightly misaligned. 
+    * Solution: I tested a number of libraries for printing and formatting text to the terminal but could not fix this problem before the deadline and reverted to using coloured text to denote emphasis.
+
+2. API Availability
+    * Problem: There have been a small number of occasions during development when Google's homepage and API services are briefly unavailable. This leads to problems retrieving patient records from the spreadsheet.
+    * Solution: Google's availability is generally excellent and downtime is outside of our influence, I added an error message to the app if it cannot connect to the API.
+
+3. Text Overflow on Table
+    * Problem: During testing of various names, it occasionally happened that a very long name would cause other text to be displaced and as a result the table formatting became misaligned.
+    * Solution: In the library used for printing the table to the console, a max-width property was set for the first and last name fields, so the table formatting remains intact.
 
 
 ## Validation Testing
@@ -208,8 +220,7 @@ This allows for a very quick feedback loop when developing and makes it easier t
 
 
 
-### Development Issues
-* When I initially designed the interface of the program, I had planned to use emoji symbols such as ✅ when presenting information to the user. However, while this worked well on the GitPod development environment, it caused problems when deployed to Heroku. It seems the terminal printed these characters with a slightly different width which caused all of the tables to be slightly misaligned. I tested a number of libraries for printing and formatting rich text but could not fix this problem before the deadline and reverted to using coloured text.
+
 
 # Deployment
 
