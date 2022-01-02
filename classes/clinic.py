@@ -227,12 +227,12 @@ class Clinic:
 
         day = pyip.inputInt(
             prompt="Enter day of birth in numbers (5 for 5th): ",
-            min=0, lessThan=31)
+            min=1, lessThan=32)
         month = pyip.inputInt(
             prompt="Enter month of birth in numbers (1 for January): ",
-            min=0, lessThan=13)
+            min=1, lessThan=13)
         year = pyip.inputInt(prompt="Enter year of birth: ",
-                             min=0, lessThan=datetime.now().year)
+                             min=1900, lessThan=datetime.now().year)
         date_of_birth = str(day)+"/" + str(month)+"/" + str(year)
 
         first_dose = second_dose = booster = False

@@ -11,6 +11,8 @@ This project is designed to fulfil the requirements of the Code Institute Portfo
 The live website can be found [here](https://vaccination-patient-manager.herokuapp.com/).
 
 <br>
+![dashboardtitle](https://github.com/neil314159/portfolio-project-3/blob/main/docs/dashboardtitle.png)
+
 
 ## Table of Contents
 * [Overview](#wireframes)
@@ -30,7 +32,29 @@ The live website can be found [here](https://vaccination-patient-manager.herokua
 * [Credits](#credits)
 * [Acknowledgements](#acknowledgements)
 
+## Initial Planning
+
+### Goals
+* To present a simple, easy-to-grasp text interface with a clear logical flow
+* Make the purpose and operation of the software clear 
+* Provide feedback and guidance on user actions
+* Gracefully handle user input and ensure data is recorded correctly
+* Operate continuously in a loop without crashing
+
+### Logical Flow
+
+I created this chart to map out the flow of control through the program and help me understand where to direct the various functions.
+<br>
+![dashboardtitle](https://github.com/neil314159/portfolio-project-3/blob/main/docs/dashboardtitle.png)
+
 # Features
+
+## User Input and Validation
+
+In a text-based software project, it is a bigger concern that input coming from the user through the keyboard is handled correctly. For this program, I used an external library called PyInputPlus. This has a number of advantages:
+* Prompts can be shown to the user which only accept a certain range of inputs. For example, to record the month part of a date of birth, then only an integer between 1 and 12 should be accepted. This makes it easier to work with data inside the program when we know it is within certain paramaters.
+* The same library can display a menu of numbered options and keep looping until a valid selection is made. This helps to make the code less verbose instead of handling every menu and validation manually.
+
 
 ## OOP and Data Model
 
@@ -50,7 +74,7 @@ This project was designed using Object Oriented Principles in mind. Here is an o
 ### Email Contact
 * If a field for email addresses was added to the patient data, then it would be possible to email users to arrange appointments or discussion. These emails could be programatically sent out through the Heroku server or via Zapier automation integrations. There are possible concerns about email deliverability when sending from your own server or free hosting.
 
-# Third Party Libraries Used
+## Third Party Libraries Used
 
 After looking at a number of projects of this type, there are a few factors that seem to contribute to extra code and clutter. The first is storing large strings of ASCII graphics to be printed out in the terminal. The second is validating user input for any interaction through the terminal. For this reason I have used the following libraries as part of my project.
 
