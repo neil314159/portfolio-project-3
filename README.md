@@ -30,6 +30,13 @@ The website can be seen [here](https://vaccination-patient-manager.herokuapp.com
 * Full name search of users would be useful for larger databases and the project could be extended to handle it.
 * The email addresses of users could be collected and they could be emailed reminder notices either via the Heroku server or Zapier automation integrations.
 
+## Third Party Libraries Used
+
+After looking at a number of projects of this type, there are a few factors that seem to contribute to extra code and clutter. The first is storing large strings of ASCII graphics to be printed out in the terminal. The second is validating user input for any interaction through the terminal. For this reason I have used the following libraries as part of my project.
+
+* [Pyfiglet](https://github.com/pwaller/pyfiglet) This library allows you to generate ASCII titles and text on the fly. You call the library on any piece of text and a string is returned which generates text effects when printed out to the terminal. For example, the word 'Dashboard' is rendered like this:
+![dashboardtitle](https://github.com/neil314159/portfolio-project-2/blob/main/docs/screenshot.png)
+
 ## Deployment
 
 ### Project Set-up

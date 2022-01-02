@@ -88,7 +88,6 @@ class Clinic:
         print(
             "This system is designed to keep track of the \n"
             'vaccination status of a list of patients in a clinic. \n'
-            '\n'
             'The following menu options are available to the user: \n'
             '\n' +
             colored('View At Risk Patients', 'cyan') +
