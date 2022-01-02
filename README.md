@@ -196,7 +196,7 @@ This allows for a very quick feedback loop when developing and makes it easier t
 ## Other Bugs
 
 1. Emoji Printing Problem
-    * Problem: During the initial design of this program, I had intended to I had planned to use emoji symbols such as ✅ when presenting information to the user. However, while this worked well on the GitPod development environment, it caused problems when deployed to Heroku. It seems the terminal printed these characters with a slightly different width which caused all of the tables to be slightly misaligned. 
+    * Problem: During the initial design of this program, I had planned to use emoji symbols such as ✅ when presenting information to the user. However, while this worked well on the GitPod development environment, it caused problems when deployed to Heroku. It seems the terminal printed these characters with a slightly different width which caused all of the tables to be slightly misaligned. 
     * Solution: I tested a number of libraries for printing and formatting text to the terminal but could not fix this problem before the deadline and reverted to using coloured text to denote emphasis.
 
 2. API Availability
