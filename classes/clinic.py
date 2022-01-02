@@ -29,6 +29,14 @@ class Clinic:
     operations. Uses a list of Patients and can update
     data back to Google Sheets.
     """
+    def __init__(self):
+        """ List of patients are loaded in
+        when the object is constructed.
+        """
+        self.patient_list = self.load_patients()
+        self.clear_display()
+        self.main_menu()
+
     def load_patients(self):
         """ Gets all values from Google Sheets and
         stores them in a list.
@@ -45,26 +53,6 @@ class Clinic:
                 Patient(a[0], index+1, a[1], a[2], a[3], a[4], a[5], a[6]))
 
         return patient_list
-
-    def header(self, text):
-        """ Converts text into a large ASCII code
-        representation for page headers.
-        """
-        result = Figlet()
-        return result.renderText(text)
-
-    def clear_display(self):
-        """ Clears screen after menu operations.
-        """
-        os.system('clear')
-
-    def __init__(self):
-        """ List of patients are loaded in
-        when the object is constructed.
-        """
-        self.patient_list = self.load_patients()
-        self.clear_display()
-        self.main_menu()
 
     def main_menu(self):
         """ Presents main menu to user, this
@@ -89,130 +77,6 @@ class Clinic:
             self.show_dashboard()
         if response == "Enroll New Patient":
             self.add_new_patient()
-
-    def show_dashboard(self):
-        """ Shows a bar chart of overall vaccination levels
-        among all patients, listing first, second and booster doses.
-        Uses a 3rd party library to output chart.
-        """
-        self.clear_display()
-        print(colored(self.header("Dashboard"), 'green'))
-        # Get total numbers calculated
-        first_dose, second_dose, booster = self.calculate_vaxed()
-        # Create chart
-        bar_chart = ["Booster", "2nd Dose", "1st Dose"]
-        percentages = [booster, second_dose, first_dose]
-        # Set parameters for chart output, based on plotext docs
-        plt.bar(bar_chart, percentages, orientation="horizontal")
-        plt.xticks([0, 25, 75, 100])
-        plt.xlim(0, 100)
-        plt.title("Vaccination Status")
-        plt.clc()
-        plt.plotsize(60, 7)
-        plt.show()
-
-        input("\n Hit the enter key to return to main menu: ")
-        self.main_menu()
-
-    def add_new_patient(self):
-        """ Gets input from user and creates
-        a new Patient in the system.
-        """
-        self.clear_display()
-        print(colored(self.header("New Patient"), 'green'))
-        # Validated user input
-        are_you_sure = pyip.inputYesNo(
-            "Are you sure you want to add a new user? "
-            "Type Yes (Y) or No (N): ")
-        if are_you_sure == 'no':
-            self.main_menu()
-
-        # Create unique new ID
-        new_id = self.generate_new_id()
-
-        firstname = pyip.inputStr('Enter First name\n')
-        lastname = pyip.inputStr('Enter Last name\n')
-
-        day = pyip.inputInt(
-            prompt="Enter day of birth... ", min=0, lessThan=31)
-        month = pyip.inputInt(
-            prompt="Enter month of birth ", min=0, lessThan=13)
-        year = pyip.inputInt(prompt="Enter year of birth ",
-                             min=0, lessThan=datetime.now().year)
-        date_of_birth = str(day)+"/" + str(month)+"/" + str(year)
-
-        first_dose = second_dose = booster = False
-        first_dose_prompt = pyip.inputYesNo(
-            "Has the patient had their first dose? Type Yes(Y) or No(N): ")
-
-        if first_dose_prompt == "yes":
-            first_dose = True
-            second_dose_prompt = pyip.inputYesNo(
-                "Has the patient had their second dose? "
-                "Type Yes(Y) or No(N): ")
-            if second_dose_prompt == "yes":
-                second_dose = True
-                booster_prompt = pyip.inputYesNo(
-                    "Has the patient had their booster?"
-                    " Type Yes (Y) or No (N): ")
-                if booster_prompt == "yes":
-                    booster = True
-        try:
-            # Add new Patient object to user list
-            new_patient = Patient(new_id, len(self.patient_list)+1,
-                                  firstname, lastname,
-                                  date_of_birth, str(first_dose).upper(),
-                                  str(second_dose).upper(),
-                                  str(booster).upper())
-            self.patient_list.append(new_patient)
-
-            # Construct data and add to Google Sheet
-            newdata = [new_id, firstname, lastname,
-                       date_of_birth, first_dose, second_dose, booster]
-            info = SHEET.worksheet('data')
-            info.append_row(newdata)
-            input("New patient added! Hit the enter "
-                  "key to return to the main menu: ")
-        except:
-            input("Something went wrong! Hit the enter "
-                  "key to return to the main menu: ")
-
-        self.main_menu()
-
-    def generate_new_id(self):
-        """ Generates a new 6-digit Patient ID number.
-        Checks for uniqueness against existing ID numbers.
-        """
-        new_id = randint(100000, 999999)
-        new_id_found = False
-        while new_id_found is False:
-            # Compiles a list of all matching IDs and checks it's length
-            if(len([x for x in self.patient_list if (
-               int(x.get_id()) == new_id)]) > 0):
-                new_id = randint(100000, 999999)
-            else:
-                new_id_found = True
-
-        return new_id
-
-    def calculate_vaxed(self):
-        """ Calculates total vaccination levels
-        for all patients in database. This data is
-        used in the bar chart on the dashboard page.
-        It sums the Booleans over all users.
-        """
-
-        firstdose = sum(1 for p in self.patient_list if p.first_dose == "TRUE")
-        totalfirstdose = (firstdose/len(self.patient_list))*100
-
-        seconddose = sum(
-            1 for p in self.patient_list if p.second_dose == "TRUE")
-        totalseconddose = (seconddose/len(self.patient_list))*100
-
-        booster = sum(1 for p in self.patient_list if p.booster_dose == "TRUE")
-        totalbooster = (booster/len(self.patient_list))*100
-
-        return(totalfirstdose, totalseconddose, totalbooster)
 
     def show_guide(self):
         """ Presents list of instructions to user
@@ -331,6 +195,71 @@ class Clinic:
 
         self.main_menu()
 
+    def add_new_patient(self):
+        """ Gets input from user and creates
+        a new Patient in the system.
+        """
+        self.clear_display()
+        print(colored(self.header("New Patient"), 'green'))
+        # Validated user input
+        are_you_sure = pyip.inputYesNo(
+            "Are you sure you want to add a new user? "
+            "Type Yes (Y) or No (N): ")
+        if are_you_sure == 'no':
+            self.main_menu()
+
+        # Create unique new ID
+        new_id = self.generate_new_id()
+
+        firstname = pyip.inputStr('Enter First name\n')
+        lastname = pyip.inputStr('Enter Last name\n')
+
+        day = pyip.inputInt(
+            prompt="Enter day of birth... ", min=0, lessThan=31)
+        month = pyip.inputInt(
+            prompt="Enter month of birth ", min=0, lessThan=13)
+        year = pyip.inputInt(prompt="Enter year of birth ",
+                             min=0, lessThan=datetime.now().year)
+        date_of_birth = str(day)+"/" + str(month)+"/" + str(year)
+
+        first_dose = second_dose = booster = False
+        first_dose_prompt = pyip.inputYesNo(
+            "Has the patient had their first dose? Type Yes(Y) or No(N): ")
+
+        if first_dose_prompt == "yes":
+            first_dose = True
+            second_dose_prompt = pyip.inputYesNo(
+                "Has the patient had their second dose? "
+                "Type Yes(Y) or No(N): ")
+            if second_dose_prompt == "yes":
+                second_dose = True
+                booster_prompt = pyip.inputYesNo(
+                    "Has the patient had their booster?"
+                    " Type Yes (Y) or No (N): ")
+                if booster_prompt == "yes":
+                    booster = True
+        try:
+            # Add new Patient object to user list
+            new_patient = Patient(new_id, len(self.patient_list)+1,
+                                  firstname, lastname,
+                                  date_of_birth, str(first_dose).upper(),
+                                  str(second_dose).upper(),
+                                  str(booster).upper())
+            self.patient_list.append(new_patient)
+
+            # Construct data and add to Google Sheet
+            newdata = [new_id, firstname, lastname,
+                       date_of_birth, first_dose, second_dose, booster]
+            info = SHEET.worksheet('data')
+            info.append_row(newdata)
+            input("New patient added! Hit the enter "
+                  "key to return to the main menu: ")
+        except:
+            input("Something went wrong! Hit the enter "
+                  "key to return to the main menu: ")
+
+        self.main_menu()
+
     def update_patient_status(self, patient_table):
         """ If a Patient has been vaccinated
         this allows their status to be updated
@@ -420,3 +349,74 @@ class Clinic:
             input("Something went wrong! Hit the "
                   "enter key to return to the main menu: ")
         self.main_menu()
+
+    def show_dashboard(self):
+        """ Shows a bar chart of overall vaccination levels
+        among all patients, listing first, second and booster doses.
+        Uses a 3rd party library to output chart.
+        """
+        self.clear_display()
+        print(colored(self.header("Dashboard"), 'green'))
+        # Get total numbers calculated
+        first_dose, second_dose, booster = self.calculate_vaxed()
+        # Create chart
+        bar_chart = ["Booster", "2nd Dose", "1st Dose"]
+        percentages = [booster, second_dose, first_dose]
+        # Set parameters for chart output, based on plotext docs
+        plt.bar(bar_chart, percentages, orientation="horizontal")
+        plt.xticks([0, 25, 75, 100])
+        plt.xlim(0, 100)
+        plt.title("Vaccination Status")
+        plt.clc()
+        plt.plotsize(60, 7)
+        plt.show()
+
+        input("\n Hit the enter key to return to main menu: ")
+        self.main_menu()
+
+    def generate_new_id(self):
+        """ Generates a new 6-digit Patient ID number.
+        Checks for uniqueness against existing ID numbers.
+        """
+        new_id = randint(100000, 999999)
+        new_id_found = False
+        while new_id_found is False:
+            # Compiles a list of all matching IDs and checks it's length
+            if(len([x for x in self.patient_list if (
+               int(x.get_id()) == new_id)]) > 0):
+                new_id = randint(100000, 999999)
+            else:
+                new_id_found = True
+
+        return new_id
+
+    def calculate_vaxed(self):
+        """ Calculates total vaccination levels
+        for all patients in database. This data is
+        used in the bar chart on the dashboard page.
+        It sums the Booleans over all users.
+        """
+
+        firstdose = sum(1 for p in self.patient_list if p.first_dose == "TRUE")
+        totalfirstdose = (firstdose/len(self.patient_list))*100
+
+        seconddose = sum(
+            1 for p in self.patient_list if p.second_dose == "TRUE")
+        totalseconddose = (seconddose/len(self.patient_list))*100
+
+        booster = sum(1 for p in self.patient_list if p.booster_dose == "TRUE")
+        totalbooster = (booster/len(self.patient_list))*100
+
+        return(totalfirstdose, totalseconddose, totalbooster)
+
+    def header(self, text):
+        """ Converts text into a large ASCII code
+        representation for page headers.
+        """
+        result = Figlet()
+        return result.renderText(text)
+
+    def clear_display(self):
+        """ Clears screen after menu operations.
+        """
+        os.system('clear')
