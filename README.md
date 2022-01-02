@@ -60,9 +60,13 @@ Other libraries used include:
 * [PEP8](http://pep8online.com/)
     * Python code validation service.
 
+## Validation Tsting
+* Python: All code was tested using the [PEP8 Validator](http://pep8online.com/). The code shows no errors and no warnings. Most of the inital warnings that required fixing were about keepinng all code within the 80 character limit.
 
 
 ## Deployment
+
+
 
 ### Project Set-up
 The Code Institute Python template found [here](https://github.com/Code-Institute-Org/python-essentials-template) was used for this project. This template was pre-configured with useful extensions and allowed me to get the project up and running quickly. I selected a repository name and used Gitpod to start editing my project files.

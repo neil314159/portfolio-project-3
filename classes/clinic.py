@@ -104,7 +104,7 @@ class Clinic:
             colored('Progress Dashboard', 'cyan') +
             ' - Here you can see a bar chart showing what fraction \n'
             'of patients have received each shot. This provides an overall \n'
-            'view of hwo much progress has been made in reaching patients. \n'
+            'view of how much progress has been made in reaching patients. \n'
         )
         prompt = colored("Hit the enter key to "
                          "return to the main menu: ", 'yellow')
@@ -118,7 +118,7 @@ class Clinic:
         text for emphasis.
         """
         self.clear_display()
-        print(colored("*** At Risk Patients ***\n", 'green'))
+        print(colored("*** Patients Ranked by Risk ***\n", 'green'))
 
         # sort table here
         self.patient_list.sort(key=lambda x: x.age(), reverse=True)
@@ -162,7 +162,7 @@ class Clinic:
         Multiple pages of results can be clicked through.
         """
         self.clear_display()
-        print(colored("*** View All Patients ***\n", 'green'))
+        print(colored("*** All Patients Listed Alphabetically ***\n", 'green'))
 
         # sort table here
         self.patient_list.sort(key=lambda x: x.lastname)
