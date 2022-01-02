@@ -1,6 +1,6 @@
 # Patient Tracker
 
-Desciption here
+Description here
 
 The website can be seen [here](https://vaccination-patient-manager.herokuapp.com/).
 
@@ -39,9 +39,9 @@ After looking at a number of projects of this type, there are a few factors that
 * [PyInputPlus](https://pypi.org/project/PyInputPlus/) - Designed to handle user input validation, this library lets you offer a number of different prompts for menus, yes/no questions, integers etc. You can restrict the range of acceptable data and make sure that user data is sanitised before processing it in your program.
 
 Other libraries used include:
-* [PrettyTable] (https://github.com/jazzband/prettytable) - printing lists of names can be difficult to format correctly. This library handles constructing the table and printing it in a pleasing layout, while also letting you set maximum widths for certain columns which is important when outputting to a terminal.
+* [PrettyTable](https://github.com/jazzband/prettytable) - printing lists of names can be difficult to format correctly. This library handles constructing the table and printing it in a pleasing layout, while also letting you set maximum widths for certain columns which is important when outputting to a terminal.
 * [Termcolor](https://pypi.org/project/termcolor/) allows the use of colours in text output on the terminal. This was used to highlight menu options and make the interface more visually appealing.
-* [Plotext] (https://github.com/piccolomo/plotext) is a library that generates charts and plotting graphics. This was implemented on the dashboard page of the project, takng overall data on patient vaccination rates and shoing it as a bar chart.
+* [Plotext](https://github.com/piccolomo/plotext) is a library that generates charts and plotting graphics. This was implemented on the dashboard page of the project, taking overall data on patient vaccination rates and showing it as a bar chart.
 * Gspread / Google Auth - these were used to set up the connection to Google Sheets. The spreadsheet was used to store the user records, and these APIs were used to read, edit and delete data.
 
 ## Technologies Used
@@ -52,7 +52,7 @@ Other libraries used include:
 * [Gitpod](https://gitpod.io) 
     * Gitpod was the development environment for this site and linked to Github for storage and deployment.
 * [MacOS Preview](https://support.apple.com/guide/preview/welcome/mac)
-    * This prpgram was used to capture and edit screenshots of the site.
+    * This program was used to capture and edit screenshots of the site.
 * [Heroku](https://dashboard.heroku.com/)
     * Used as a server for the project once deployed.
 * [LucidChart](https://www.lucidchart.com/)
@@ -60,16 +60,16 @@ Other libraries used include:
 * [PEP8](http://pep8online.com/)
     * Python code validation service.
 
-## Validation Tsting
-* Python: All code was tested using the [PEP8 Validator](http://pep8online.com/). The code shows no errors and no warnings. Most of the inital warnings that required fixing were about keepinng all code within the 80 character limit.
+## Validation Testing
+* Python: All code was tested using the [PEP8 Validator](http://pep8online.com/). The code shows no errors and no warnings. Most of the initial warnings that required fixing were about keeping all code within the 80 character limit.
 
 
 # Deployment
 
 ## Creating the Project
-1. A new repository was created for the project on GitHUb by clicking 'New Repository' on the GitHUb user page, giving a name to the project.
+1. A new repository was created for the project on GitHub by clicking 'New Repository' on the GitHub user page, giving a name to the project.
 1. The GitPod link created by the Chrome extension was clicked on the Code Institute Python template found [here](https://github.com/Code-Institute-Org/python-essentials-template).
-1. This created a virtual workspace which was linked to my GitHUb account.
+1. This created a virtual workspace which was linked to my GitHub account.
 1. After writing code for the project, I used git commands add, commit and push which sent all the project files from GitPod to my GitHub repository.
 
 ## Deploying to Heroku
@@ -78,9 +78,9 @@ The project was deployed on the Heroku site by using these steps:
 1. Select the 'New' button and click 'Create New App'.
 1. Choose a unique name for your app.
 1. Add the buildpacks for Python and NodeJS from the settings page for your project. They must be added in this order.
-1. Add the configuration variables for your app on the settings page. These incluse PORT=8000 and the credentials used for your API access.
+1. Add the configuration variables for your app on the settings page. These include PORT=8000 and the credentials used for your API access.
 1. On the settings page, click the 'Deploy' tab.
-1. Select GitHub as the method for deplyments.
+1. Select GitHub as the method for deployments.
 1. Sign in when prompted with your GitHub login and search for the repository for your project.
 1. Click the correct repository and click 'Connect'.
 1. Under the deployment type section, you can choose between automatic deployment whenever you push updated code to GitHub, or manual deployment where you must confirm that you want the site updated.
@@ -91,10 +91,10 @@ The project was deployed on the Heroku site by using these steps:
 1. Log into your GitHub account.
 1. Navigate to the project page found [here](https://github.com/neil314159/portfolio-project-3).
 1. Click the 'Fork' icon on the upper right hand side of the screen.
-1. This action copies the code into yoru own repo so you can examine and edit it in the development environment of your choice.
+1. This action copies the code into your own repo so you can examine and edit it in the development environment of your choice.
 
 #### Cloning to Gitpod
-1. Install the Google Chrome Gitpod plugin found [here](https://github.com/neil314159/portfolio-project-3).
+1. Install the Google Chrome Gitpod plugin found [here](https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki).
 1. Navigate to the project repository page [here](https://github.com/neil314159/portfolio-project-3).
 1. Click the green GitPod button on the top right of the screen.
 1. This will open the project in a virtual GitPod workspace.
@@ -108,17 +108,6 @@ The project was deployed on the Heroku site by using these steps:
 1. Decompress the files on your own machine.
 1. Open them in your local IDE such as VSCode.
 
-
-### Project Set-up
-The Code Institute Python template found [here](https://github.com/Code-Institute-Org/python-essentials-template) was used for this project. This template was pre-configured with useful extensions and allowed me to get the project up and running quickly. I selected a repository name and used Gitpod to start editing my project files.
-
-The Remote/Guide website was deployed to GitHub Pages by following these steps:
-1. Navigate to the [Project 1 portfolio](https://github.com/neil314159/portfolio-project-1) on GitHub.
-1. Click on the 'Settings' tab.
-1. Select 'Pages' from the menu on the left. 
-1. Select the 'main' branch in the source selector drop-down.
-1. Click 'Save'.
-1. After a few moments the website was deployed, and can be accessed here: https://neil314159.github.io/portfolio-project-1/
 
 # Credits
 * Fake user data including names and dates of birth were generated on the website [Mockaroo](https://www.mockaroo.com).
