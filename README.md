@@ -27,8 +27,11 @@ The website can be seen [here](https://vaccination-patient-manager.herokuapp.com
 # Features
 
 ## Possible Future Features
-* Full name search of users would be useful for larger databases and the project could be extended to handle it.
-* The email addresses of users could be collected and they could be emailed reminder notices either via the Heroku server or Zapier automation integrations.
+
+### Full Search
+* Currently the user browses through the list of patient names and selects via number which record they want to update or delete. If the number of records were larger it would be useful to plmement full search capabilities. This would probably require a proper databse package rather than using Google Sheets for data storage.
+### Email Contact
+* If a field for email addresses was added to the patient data, then it would be possible to email users to arrange appointments or discussion. These emails could be programatically sent out through the Heroku server or via Zapier automation integrations. There are possible concerns about email deliverability when sending from your own server or free hosting.
 
 ## Third Party Libraries Used
 
@@ -55,7 +58,7 @@ Other libraries used include:
     * This program was used to capture and edit screenshots of the site.
 * [Heroku](https://dashboard.heroku.com/)
     * Used as a server for the project once deployed.
-* [LucidChart](https://www.lucidchart.com/)
+* [LucidChart](https://www.lucid.app/)
     * For creating charts and flow diagrams.
 * [PEP8](http://pep8online.com/)
     * Python code validation service.
