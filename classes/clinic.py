@@ -33,10 +33,12 @@ class Clinic:
         """ Gets all values from Google Sheets and
         stores them in a list.
         """
-        patient_list = []
-        info = SHEET.worksheet('data')
-        data = info.get_all_values()
-
+        try:
+            patient_list = []
+            info = SHEET.worksheet('data')
+            data = info.get_all_values()
+        except:
+            print("Something went wrong loading the database.")
         # Gives an index that reflects the position in spreadsheet
         for index, a in enumerate(data):
             patient_list.append(
@@ -89,20 +91,23 @@ class Clinic:
             self.add_new_patient()
 
     def show_dashboard(self):
+        """ Shows a bar chart of overall vaccination levels
+        among all patients, listing first, second and booster doses.
+        Uses a 3rd party library to output chart.
+        """
         self.clear_display()
-
         print(colored(self.header("Dashboard"), 'green'))
-
+        # Get total numbers calculated
         first_dose, second_dose, booster = self.calculate_vaxed()
-
+        # Create chart
         bar_chart = ["Booster", "2nd Dose", "1st Dose"]
         percentages = [booster, second_dose, first_dose]
-
+        # Set parameters for chart output, based on plotext docs
         plt.bar(bar_chart, percentages, orientation="horizontal")
         plt.xticks([0, 25, 75, 100])
         plt.xlim(0, 100)
         plt.title("Vaccination Status")
-        plt.clc()  # to remove colors
+        plt.clc()
         plt.plotsize(60, 7)
         plt.show()
 
@@ -117,7 +122,8 @@ class Clinic:
         print(colored(self.header("New Patient"), 'green'))
         # Validated user input
         are_you_sure = pyip.inputYesNo(
-            "Are you sure you want to add a new user? Type Yes(Y) or No(N): ")
+            "Are you sure you want to add a new user? "
+            "Type Yes (Y) or No (N): ")
         if are_you_sure == 'no':
             self.main_menu()
 
@@ -125,12 +131,12 @@ class Clinic:
         new_id = self.generate_new_id()
 
         firstname = pyip.inputStr('Enter First name\n')
-        lastname = pyip.inputStr('Enter last name\n')
+        lastname = pyip.inputStr('Enter Last name\n')
 
         day = pyip.inputInt(
             prompt="Enter day of birth... ", min=0, lessThan=31)
         month = pyip.inputInt(
-            prompt="Enter amonth of birth ", min=0, lessThan=13)
+            prompt="Enter month of birth ", min=0, lessThan=13)
         year = pyip.inputInt(prompt="Enter year of birth ",
                              min=0, lessThan=datetime.now().year)
         date_of_birth = str(day)+"/" + str(month)+"/" + str(year)
@@ -151,23 +157,26 @@ class Clinic:
                     " Type Yes (Y) or No (N): ")
                 if booster_prompt == "yes":
                     booster = True
+        try:
+            # Add new Patient object to user list
+            new_patient = Patient(new_id, len(self.patient_list)+1,
+                                  firstname, lastname,
+                                  date_of_birth, str(first_dose).upper(),
+                                  str(second_dose).upper(),
+                                  str(booster).upper())
+            self.patient_list.append(new_patient)
 
-        # Add new Patient object to user list
-        new_patient = Patient(new_id, len(self.patient_list)+1,
-                              firstname, lastname,
-                              date_of_birth, str(first_dose).upper(),
-                              str(second_dose).upper(), str(booster).upper())
-        self.patient_list.append(new_patient)
+            # Construct data and add to Google Sheet
+            newdata = [new_id, firstname, lastname,
+                       date_of_birth, first_dose, second_dose, booster]
+            info = SHEET.worksheet('data')
+            info.append_row(newdata)
+            input("New patient added! Hit the enter "
+                  "key to return to the main menu: ")
+        except:
+            input("Something went wrong! Hit the enter "
+                  "key to return to the main menu: ")
 
-        # Construct data and add to Google Sheet
-        newdata = [new_id, firstname, lastname,
-                   date_of_birth, first_dose, second_dose, booster]
-
-        info = SHEET.worksheet('data')
-        info.append_row(newdata)
-
-        input("New patient added! Hit the enter "
-              "key to return to the main menu: ")
         self.main_menu()
 
     def generate_new_id(self):
@@ -337,7 +346,7 @@ class Clinic:
             self.main_menu()
 
         # Get reference from screen of user to update
-        to_update = pyip.inputInt(
+        update = pyip.inputInt(
                                   prompt="Enter the number of the "
                                   "patient you want to update: ",
                                   min=1, lessThan=len(self.patient_list)+1)
@@ -359,21 +368,25 @@ class Clinic:
                 if booster_prompt == "yes":
                     booster = True
 
-        # Updated with string of boolean to be compatible with Google Sheets
-        self.patient_list[to_update-1].first_dose = str(first_dose).upper()
-        self.patient_list[to_update-1].second_dose = str(second_dose).upper()
-        self.patient_list[to_update-1].booster_dose = str(booster).upper()
+        try:
+            # Use string of boolean to be compatible with Google Sheets
+            self.patient_list[update-1].first_dose = str(first_dose).upper()
+            self.patient_list[update-1].second_dose = str(second_dose).upper()
+            self.patient_list[update-1].booster_dose = str(booster).upper()
 
-        data = SHEET.worksheet('data')
-        data.update_cell(self.patient_list[int(to_update)-1].sheet_index,
-                         5, str(first_dose).upper())
-        data.update_cell(self.patient_list[int(to_update)-1].sheet_index,
-                         6, str(second_dose).upper())
-        data.update_cell(self.patient_list[int(to_update)-1].sheet_index,
-                         7, str(booster).upper())
+            data = SHEET.worksheet('data')
+            data.update_cell(self.patient_list[int(update)-1].sheet_index,
+                             5, str(first_dose).upper())
+            data.update_cell(self.patient_list[int(update)-1].sheet_index,
+                             6, str(second_dose).upper())
+            data.update_cell(self.patient_list[int(update)-1].sheet_index,
+                             7, str(booster).upper())
 
-        input("Update was successful! Hit the "
-              "enter key to return to the main menu: ")
+            input("The update was successful! Hit the "
+                  "enter key to return to the main menu: ")
+        except:
+            input("There was a problem updating the user. Hit the "
+                  "enter key to return to the main menu: ")
         self.main_menu()
 
     def delete_patient(self, patient_table):
@@ -394,11 +407,16 @@ class Clinic:
         to_delete = pyip.inputInt(
             prompt="Enter the number of the patient you want to delete: ",
             min=1, lessThan=len(self.patient_list)+1)
-
-        # Row is deleted from Google Sheets
-        info = SHEET.worksheet('data')
-        info.delete_row(
-                        self.patient_list[int(to_delete)-1].sheet_index)
-        del self.patient_list[int(to_delete)-1]
-        input("Hit the enter key to return to the main menu: ")
+        try:
+            # Row is deleted from Google Sheets
+            info = SHEET.worksheet('data')
+            info.delete_row(
+                            self.patient_list[int(to_delete)-1].sheet_index)
+            # Object deleted from user list
+            del self.patient_list[int(to_delete)-1]
+            input("Deletion was successful! Hit "
+                  "the enter key to return to the main menu: ")
+        except:
+            input("Something went wrong! Hit the "
+                  "enter key to return to the main menu: ")
         self.main_menu()
