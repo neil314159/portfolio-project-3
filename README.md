@@ -1,13 +1,16 @@
-# **Patient Vaccination Manager**
+# **Vaccination Manager**
 
 ## **Overview**
 
+Vaccination Manager is a simplified version of management software that might be used by a medical practice. It is designed to record the personal details of patients and track their record of vaccination. 
 
-Description here
+It is presented as a text-based interface in a terminal hosted on Heroku. Users can input new patients, edit their history and delete their records from the system. The software stores patient data on Google Sheets spreadsheets via an API. These records can be processed and analysed. For example, patients can be ranked according to their vaccination records and age to determine risk. In a medical practice this would help prioritise and contact patients. 
+
+This project is designed to fulfil the requirements of the Code Institute Portfolio 3 Submission.
 
 The live website can be found [here](https://vaccination-patient-manager.herokuapp.com/).
 
-![Mockup](https://github.com/neil314159/portfolio-project-2/blob/main/docs/screenshot.png) <br>
+<br>
 
 ## Table of Contents
 * [Overview](#wireframes)
