@@ -1,8 +1,8 @@
-# Patient Tracker
+# Patient Vaccination Manager
 
 Description here
 
-The website can be seen [here](https://vaccination-patient-manager.herokuapp.com/).
+The live website can be found [here](https://vaccination-patient-manager.herokuapp.com/).
 
 ![Mockup](https://github.com/neil314159/portfolio-project-2/blob/main/docs/screenshot.png) <br>
 
@@ -26,14 +26,23 @@ The website can be seen [here](https://vaccination-patient-manager.herokuapp.com
 
 # Features
 
+## OOP and Data Model
+ This project was designed using Object Oriented Principes in mind. Here is an overview of the classes used to create the site:
+### Clinic class
+* This is the overall management class for the app, it takes in the data on loading, and also presents menu options to the user. It has helper functions to display data, clear the screen, create and edit patient records. It also sorts and filters the data in order to present it to the user.
+### Patient class
+* This represents the individual patient kept track of by the clinic. This class has a unique 6 digit ID, and attributes showing personal details and vaccination records. It has a method which calculates their age based on today's date and returns it to the Clinic class for sorting.
+### Table View class
+* The main functionality of this program is in presenting pages of patient records to the user. Rather than printing long lists whcih require scrolling, I wanted to allow the user to page forward and back through a table. This class takes in data and prints out a slice of it in table form based on which page number is currently selected. This allows the program menu to show data and options that properly persist over time rather than being reset.
+
 ## Possible Future Features
 
 ### Full Search
-* Currently the user browses through the list of patient names and selects via number which record they want to update or delete. If the number of records were larger it would be useful to plmement full search capabilities. This would probably require a proper databse package rather than using Google Sheets for data storage.
+* Currently the user browses through the list of patient names and selects via number which record they want to update or delete. If the number of records were larger it would be useful to implement full search capabilities. This would probably require a proper database package rather than using Google Sheets for data storage.
 ### Email Contact
 * If a field for email addresses was added to the patient data, then it would be possible to email users to arrange appointments or discussion. These emails could be programatically sent out through the Heroku server or via Zapier automation integrations. There are possible concerns about email deliverability when sending from your own server or free hosting.
 
-## Third Party Libraries Used
+# Third Party Libraries Used
 
 After looking at a number of projects of this type, there are a few factors that seem to contribute to extra code and clutter. The first is storing large strings of ASCII graphics to be printed out in the terminal. The second is validating user input for any interaction through the terminal. For this reason I have used the following libraries as part of my project.
 
@@ -113,8 +122,8 @@ The project was deployed on the Heroku site by using these steps:
 
 
 # Credits
-* Fake user data including names and dates of birth were generated on the website [Mockaroo](https://www.mockaroo.com).
-* The techniques for connecting to the Google Sheets spreadsheets via API were taken from the Code Institite training materials.
+* Mock user data including names and dates of birth were generated on the website [Mockaroo](https://www.mockaroo.com).
+* The techniques for connecting to the Google Sheets spreadsheets via API were taken from the Code Institute training materials.
 * The table view required some code to iterate over a slice of a list while maintaining a proper index, this was inspired by [this question](https://stackoverflow.com/questions/23159254/python-slices-of-enumerate) on StackOverflow.
 * The [documentation](https://github.com/piccolomo/plotext/blob/master/readme/bar.md) for the Plotext library was used to construct the bar chart on the dashboard page.
 * The idea of counting Boolean values by simply adding them to quickly sort a list was shown in [this answer](https://stackoverflow.com/questions/16455777/python-count-elements-in-a-list-of-objects-with-matching-attributes#comment23606447_16455812) on StackOverflow.
