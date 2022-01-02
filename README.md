@@ -43,17 +43,70 @@ The live website can be found [here](https://vaccination-patient-manager.herokua
 
 I created this chart to map out the flow of control through the program and help me understand where to direct the various functions.
 <br>
-![dashboardtitle](https://github.com/neil314159/portfolio-project-3/blob/main/docs/dashboardtitle.png)
+![dashboardtitle](/docs/dashboardtitle.png)
 
 # Features
 
-## **Welcome Screen:**
-From the welcome screen, the user has access to three things: -
-* Game rules/How to play.
-* Back Story.
-* Start the game.  
+## Main Menu
+This is the home screen and main menu
+* Simple, numbered menu options.
+* Colourful ASCII art title.
+* Only 1-5 accepted from keyboard, all other input is rejected.  
   
-![Welcome screen screenshot](docs/mainmenu.png)
+![main menu screenshot](docs/mainmenu.png)
+
+## User Guide 
+* Gives the user an overview of the function of the software
+* Explains menu options
+* Coloured text to highlight information
+* User can easily return to main menu.
+
+![user guide screenshot](docs/userguide.png)
+
+## View At Risk Patients  
+* Shows a table view of patient records
+* Sorted by vaccine status and then by age to determine risk
+* Contrast colours highlight actionable cases
+* Menu options to go forward and back through pages of records
+  
+![at risk patients screenshot](docs/riskpatients.png)
+
+## View All Patients  
+* Alphabetically sorted list of all patients
+* Offers user option to edit or delete a record
+* User types in number of record from left-hand column and can then make and edit or deletion
+* Software confirms whether or not you want to make these changes, if not you return to the main menu
+  
+![all patients screenshot](docs/allpatients.png)
+
+## Add New Patient  
+* List of guided questions to input new patient
+* Answers validated to prevent incorrect data
+* Some questions are sequential, so if you missed first vaccine you won't be asked about follow-up shots, as they are dependent on receiving the first one.
+* Message displayed on successful addition of patient. In case of a problem with the API, an error message will be displayed.
+  
+![add new patient](docs/addnew.png)
+
+## Progress Dashboard  
+* Bar chart showing how many of the current patients have been vaccinated to each level.
+* Will update as patient records change over time.
+* Created using external library.
+  
+![Welcome screen screenshot](docs/dashboard.png)
+
+## Update Patient 
+* Select a current patient and update their vaccine history through series of prompts.
+* Similar to when creating new user, questions are nested.
+  
+![Welcome screen screenshot](docs/update.png)
+
+## Delete Patient 
+* User selects patient via number on left-hand column
+* The system confirms that a deletion is requested, otherwise returns to the main  menu
+* A confirmation is displayed if the deletion was effective.
+  
+![Welcome screen screenshot](docs/delete.png)
+
 
 ## User Input and Validation
 
