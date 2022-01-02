@@ -11,7 +11,7 @@ The website can be seen [here](https://vaccination-patient-manager.herokuapp.com
 * [How to Use](#wireframes)
 * [Planning](#wireframes)
 * [Data Model](#wireframes)
-* [OOP Principles](#)
+* [OOP Principles and Data Model](#)
 * [Flow of Control](#wireframes)
 * [Testing](#wireframes)
 * [Third Party Libraries](#wireframes)
@@ -84,8 +84,29 @@ The project was deployed on the Heroku site by using these steps:
 1. Sign in when prompted with your GitHub login and search for the repository for your project.
 1. Click the correct repository and click 'Connect'.
 1. Under the deployment type section, you can choose between automatic deployment whenever you push updated code to GitHub, or manual deployment where you must confirm that you want the site updated.
+
 ## Local Deployment
 
+#### Forking the repo on GitHub
+1. Log into your GitHub account.
+1. Navigate to the project page found [here](https://github.com/neil314159/portfolio-project-3).
+1. Click the 'Fork' icon on the upper right hand side of the screen.
+1. This action copies the code into yoru own repo so you can examine and edit it in the development environment of your choice.
+
+#### Cloning to Gitpod
+1. Install the Google Chrome Gitpod plugin found [here](https://github.com/neil314159/portfolio-project-3).
+1. Navigate to the project repository page [here](https://github.com/neil314159/portfolio-project-3).
+1. Click the green GitPod button on the top right of the screen.
+1. This will open the project in a virtual GitPod workspace.
+1. Install the required libraries by executing the command 'pip3 install -r requirements.txt' in your GitPod terminal.
+
+
+#### Download a zip file of the source code
+1. Click this [link](https://github.com/neil314159/portfolio-project-3) to the project home page.
+1. Click the 'Code' button on the right hand side.
+1. Select "Download Zip'
+1. Decompress the files on your own machine.
+1. Open them in your local IDE such as VSCode.
 
 
 ### Project Set-up
