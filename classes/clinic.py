@@ -83,20 +83,29 @@ class Clinic:
         """
         self.clear_display()
         print(colored(self.header("User Guide"), 'green'))
-
+        
         print(
-            'The Covid Vacination Manager allows you to keep track \n'
-            'of the vaccination status of a list of patients \n'
+            "This system is designed to keep track of the \n"
+            'vaccination status of a list of patients in a clinic. \n'
             '\n'
-            'You can view a list of all patients and see at a glance\n'
-            'their status.'
-            '\n You can also add new patients or update the status of \n'
-            'current ones \n'
-            'There is a dashboard which provides graphical representation\n'
-            'of the entire patient body and allows you to compile lists'
-            '\n of those most at risk'
+            'The following menu options are available to the user: \n'
             '\n'
-            '\n'
+            + colored('View At Risk Patients', 'cyan') +
+            ' - Here you can view a list of patients \n'
+            'sorted by urgency, first ranked by how many vaccine shots \n'
+            'they require, and then by age. \n'
+            + colored('View All Patients', 'cyan') +
+            ' - This shows a list of all patients sorted alphabetically \n'
+            'and shows further menu options to let you update patient details \n'
+             'or remove them from the system. \n'
+            + colored('Enroll New Patient', 'cyan') +
+            ' - A set of guided questions will take the details of a new \n'
+             'patient and enter them into the database. \n'
+            + colored('Progress Dashboard', 'cyan') +
+            ' - Here you can see a bar chart showing what  \n'
+            'percentage of patients have received each shot. This \n'
+            'provides a high-level view of hwo much progress \n'
+            'has been made. \n'
         )
         prompt = colored("\n Hit the enter key to "
                          "return to the main menu: ", 'yellow')
@@ -364,7 +373,7 @@ class Clinic:
         Uses a 3rd party library to output chart.
         """
         self.clear_display()
-        print(colored(self.header("Progress"), 'green'))
+        print(colored(self.header("Dashboard"), 'green'))
         # Get total numbers calculated
         first_dose, second_dose, booster = self.calculate_vaxed()
         # Create chart
