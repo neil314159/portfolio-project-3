@@ -43,7 +43,7 @@ The live website can be found [here](https://vaccination-patient-manager.herokua
 
 I created this chart to map out the flow of control through the program and help me understand where to direct the various functions.
 <br>
-![dashboardtitle](/docs/dashboardtitle.png)
+![dashboardtitle](/docs/Flowchart.png)
 
 # Features
 
