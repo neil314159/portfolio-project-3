@@ -72,7 +72,7 @@ class Clinic:
         are finished.
         """
         self.clear_display()
-        print(colored(self.header("Vaccine Clinic Tracker"), 'green'))
+        print(colored(self.header("Vaccination Manager"), 'green'))
         # 3rd Party library used for input validation on menu
         response = pyip.inputMenu(['Guide', 'View At Risk Patients',
                                    'View All Patients',
@@ -399,8 +399,8 @@ class Clinic:
         print(colored("*** View All Patients ***\n", 'green'))
         patient_table.print_table()
         are_you_sure = pyip.inputYesNo(
-               "Are you sure you want to delete a patient from"
-               " the system? Type Yes (Y) or No (N): ")
+               "Are you sure you want to delete a patient?"
+               "  Type Yes (Y) or No (N): ")
         if are_you_sure == 'no':
             self.main_menu()
         # Takes on screen reference and links to the Patient object
