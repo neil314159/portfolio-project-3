@@ -33,7 +33,7 @@ The website can be seen [here](https://vaccination-patient-manager.herokuapp.com
 ## Deployment
 
 ### Project Set-up
-The Code Institute template found [here](https://github.com/Code-Institute-Org/gitpod-full-template) was used. This template was pre-configured with useful extensions and allowed me to get the project up and running quickly. I selected a repository name and used Gitpod to start editing my project files.
+The Code Institute Python template found [here](https://github.com/Code-Institute-Org/python-essentials-template) was used for this project. This template was pre-configured with useful extensions and allowed me to get the project up and running quickly. I selected a repository name and used Gitpod to start editing my project files.
 
 The Remote/Guide website was deployed to GitHub Pages by following these steps:
 1. Navigate to the [Project 1 portfolio](https://github.com/neil314159/portfolio-project-1) on GitHub.
@@ -44,11 +44,12 @@ The Remote/Guide website was deployed to GitHub Pages by following these steps:
 1. After a few moments the website was deployed, and can be accessed here: https://neil314159.github.io/portfolio-project-1/
 
 ## Credits
-* Fake user data including names and dates of birth were generated on the website [Mockaroo](https://www.mockaroo.com)
+* Fake user data including names and dates of birth were generated on the website [Mockaroo](https://www.mockaroo.com).
 * The techniques for connecting to the Google Sheets spreadsheets via API were taken from the Code Institite training materials.
-* The table view required some code to iterate over a slice of a list while maintainingg a proper index, this was inspired by [this question](https://stackoverflow.com/questions/23159254/python-slices-of-enumerate) on StackOverflow.
+* The table view required some code to iterate over a slice of a list while maintaining a proper index, this was inspired by [this question](https://stackoverflow.com/questions/23159254/python-slices-of-enumerate) on StackOverflow.
 * The [documentation](https://github.com/piccolomo/plotext/blob/master/readme/bar.md) for the Plotext library was used to construct the bar chart on the dashboard page.
 * The idea of counting Boolean values by simply adding them to quickly sort a list was shown in [this answer](https://stackoverflow.com/questions/16455777/python-count-elements-in-a-list-of-objects-with-matching-attributes#comment23606447_16455812) on StackOverflow.
+* The [documentation](https://github.com/jazzband/prettytable) for the PrettyTable library showed how to construct and print properly formatted data.
 
 ### Acknowledgements
 Thanks to Daisy McGirr for her advice and guidance.

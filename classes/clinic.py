@@ -104,11 +104,10 @@ class Clinic:
             'patient and enter them into the database. \n' +
             colored('Progress Dashboard', 'cyan') +
             ' - Here you can see a bar chart showing what  \n'
-            'percentage of patients have received each shot. This \n'
-            'provides a high-level view of hwo much progress \n'
-            'has been made. \n'
+            'percentage of patients have received each shot. This provides \n'
+            'a high-level view of hwo much progress has been made. \n'
         )
-        prompt = colored("\n Hit the enter key to "
+        prompt = colored("Hit the enter key to "
                          "return to the main menu: ", 'yellow')
         input(prompt)
         self.main_menu()
